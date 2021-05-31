@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Bayon&display=swap');
+
+* {
+ font-family: 'Bayon', cursive;
+}
+
+body {
+ font-family: 'Bayon', cursive;
+ background: rgb(44, 49, 54) !important;
+ overflow-y: scroll;
+}
+
+.testColor {
+ color: rgb(238, 238, 238);
+}
+
+.khFont {
+ font-family: 'Bayon', cursive;
+}
+
+.carasal {
+ background: rgba(0, 0, 0, 0.623);
+}
+
+.navItem {
+ color: white !important;
+}
+
+.cateCon {
+ color: white !important;
+ background: rgb(0, 0, 0);
+}
+.cateItem {
+ color: white !important;
+ background: rgb(44, 62, 80);
+}
+.rounded-4 {
+ border-radius: 15px;
+}
+.navItem:hover {
+ background-color: rgb(61, 76, 90) !important;
+}
+.video {
+ padding: 0.7rem 0.7rem 0.7rem 1rem;
+}
+.video:hover {
+ cursor: pointer;
+ background-color: rgb(61, 76, 90) !important;
+}
+.navItemColor {
+ color: black !important;
+}
+
+.player-wrapper {
+ position: relative;
+ padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+ border-radius: 5px;
+}
+
+.react-player {
+ position: absolute;
+ top: 0;
+ left: 0;
+}
+
+.loader {
+ position: absolute;
+ top: 45%;
+ left: 45%;
+}
+
+.videoCard:hover {
+ cursor: pointer;
+ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+}
+
+.cardHover {
+ opacity: 1;
+ background: #a73737; /* fallback for old browsers */
+ background: -webkit-linear-gradient(
+  to top,
+  #000000c5,
+  #0000009a,
+  #00000000
+ ); /* Chrome 10-25, Safari 5.1-6 */
+ background: linear-gradient(
+  to top,
+  #000000c5,
+  #0000009a,
+  #00000000
+ ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+.cardH {
+ top: -360px;
+ background: rgba(0, 0, 0, 0.541);
+}
+.videoCard:hover .cardH {
+ transition: 0.5s;
+ top: 0px;
+}
+.ep {
+ overflow-y: auto;
+ height: 450px;
+}
+
+.epActive {
+ color: rgb(247, 171, 6) !important;
+ background: rgb(0, 112, 156);
+}
+
+.t_warning {
+ color: rgb(247, 171, 6) !important;
+}
