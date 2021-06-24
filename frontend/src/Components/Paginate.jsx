@@ -12,8 +12,8 @@ const Paginate = ({ pages = 10, page = 1, isAdmin = false, keyword = '' }) => {
       to={
        !isAdmin
         ? keyword
-          ? `/home/movies/search/page/${x + 1}?keyword=${keyword}`
-          : `/home/movies/page/${x + 1}`
+          ? `/movies/search/page/${x + 1}?keyword=${keyword}`
+          : `/movies/page/${x + 1}`
         : keyword
         ? `/adminPanel/movies/search/page/${x + 1}?keyword=${keyword}`
         : `/adminPanel/movies/page/${x + 1}`

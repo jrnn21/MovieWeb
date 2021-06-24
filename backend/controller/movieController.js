@@ -1,23 +1,54 @@
 import asyncHandler from 'express-async-handler';
 import Movie from '../models/movieModel.js';
 import colors from 'colors';
+import moment from 'moment';
+
+// @desc    Fetch all movie slide
+// @route   GET /api/movies/slide/img
+// @access  Public
+const getSlide = asyncHandler(async (req, res) => {
+ const movies = await Movie.find({
+  slideImg: {
+   $ne: '/uploads/videoUploads/default-slide.jpg',
+  },
+ }).sort({ updatedAt: -1 });
+
+ if (movies) {
+  res.json(movies);
+ } else {
+  res.status(404);
+  throw new Error('Movies not Found');
+ }
+});
+
+// @desc    Fetch all movie update today
+// @route   GET /api/movies/update/today
+// @access  Public
+const getMoviesUpdateToday = asyncHandler(async (req, res) => {
+ var start = moment().startOf('day'); // set to 12:00 am today
+ var end = moment().endOf('day'); // set to 23:59 pm today
+ const movies = await Movie.find({
+  updatedAt: { $gte: start, $lt: end },
+ })
+  .limit(3)
+  .sort({ updatedAt: 1 });
+
+ if (movies) {
+  res.json(movies);
+ } else {
+  res.status(404);
+  throw new Error('Movies not Found');
+ }
+});
 
 //@desc    Fetch search movies
 //@route   GET /api/search/movies
 //@access  Public
 const getMovies = asyncHandler(async (req, res) => {
- const pageSize = 10;
+ const pageSize = 24;
  const page = Number(req.query.pageNumber) || 1;
- const keyword = req.query.keyword
-  ? {
-     movieName: {
-      $regex: req.query.keyword,
-      $options: 'i',
-     },
-    }
-  : {};
 
- const keywordTag = req.query.keyword
+ const keyword = req.query.keyword
   ? {
      tag: {
       $regex: req.query.keyword,
@@ -25,48 +56,13 @@ const getMovies = asyncHandler(async (req, res) => {
      },
     }
   : {};
-
- const movies = await Movie.find({ ...keyword });
- const moviesTag = await Movie.find({ ...keywordTag });
-
- movies.forEach((m) => {
-  moviesTag.forEach((mt) => {
-   if (m.id === mt.id) {
-    moviesTag.shift(m);
-   }
-  });
- });
-
- console.log(movies.length, moviesTag.length);
-
- const mergeMovies = [...movies, ...moviesTag];
- const count = mergeMovies.length;
- let i = 0;
- i = (page - 1) * pageSize;
-
- const moviesProvider = mergeMovies.slice(i, i + pageSize);
- moviesProvider.sort((a, b) => (a.updatedAt > b.updatedAt ? -1 : 1));
-
- res.json({
-  movies: moviesProvider,
-  page,
-  pages: Math.ceil(count / pageSize),
-  count,
- });
+ const count = await Movie.countDocuments({ ...keyword });
+ const movies = await Movie.find({ ...keyword })
+  .sort({ updatedAt: -1 })
+  .limit(pageSize)
+  .skip(pageSize * (page - 1));
+ res.json({ movies, page, pages: Math.ceil(count / pageSize), count });
 });
-
-//@desc    Fetch all movie
-//@route   GET /api/movies
-//@access  Public
-// const getMovies = asyncHandler(async (req, res) => {
-//  const movies = await Movie.find({}).sort({ updatedAt: -1 });
-//  if (movies) {
-//   res.json(movies);
-//  } else {
-//   res.status(404);
-//   throw new Error('Movies not Found');
-//  }
-// });
 
 //@desc    Fetch movie detail
 //@route   GET /api/movies/:mid
@@ -91,6 +87,7 @@ const createMovie = asyncHandler(async (req, res) => {
   movieType: 'រឿងភាគថៃ',
   img: '/uploads/videoUploads/default-image.jpg',
   tag: '',
+  slideImg: '/uploads/videoUploads/default-slide.jpg',
   movieName: 'ដាក់ឈ្មោះ',
   updateMovie: 'ថ្មី',
   episodes: [],
@@ -126,6 +123,8 @@ const updateMovie = asyncHandler(async (req, res) => {
   movie.movieType = movieEdit.movieType;
   movie.updateMovie = movieEdit.updateMovie;
   movie.img = movieEdit.img;
+  movie.slideImg =
+   movieEdit.slideImg || '/uploads/videoUploads/default-slide.jpg';
   movie.tag = movieEdit.tag;
   const movieUpdate = await movie.save();
   res.json(movieUpdate);
@@ -244,4 +243,6 @@ export {
  updateEpByMovie,
  deleteEpByMovie,
  getEpById,
+ getMoviesUpdateToday,
+ getSlide,
 };

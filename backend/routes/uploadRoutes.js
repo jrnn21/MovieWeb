@@ -53,4 +53,22 @@ router.post('/delete', upload.single('image'), async (req, res) => {
  }
 });
 
+router.post('/delete/slide', upload.single('image'), async (req, res) => {
+ const filePath = __dirname + req.body.slideImg;
+ console.log(req.body.slideImg);
+ try {
+  if (
+   req.body.slideImg !== '/uploads/videoUploads/default-slide.jpg' &&
+   req.body.slideImg !== undefined
+  ) {
+   fs.unlinkSync(filePath);
+   res.json({ suc: 'gg' });
+  } else {
+   res.json({ suc: 'gg' });
+  }
+ } catch (err) {
+  console.error(err);
+ }
+});
+
 export default router;

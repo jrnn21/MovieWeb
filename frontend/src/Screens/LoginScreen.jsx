@@ -17,7 +17,7 @@ const LoginScreen = ({ location, history }) => {
    if (redirect !== '/') {
     history.push(redirect);
    }
-   history.push('/adminPanel');
+   history.push('/adminPanel/movies');
   }
  }, [history, userIn, redirect]);
 
@@ -34,7 +34,7 @@ const LoginScreen = ({ location, history }) => {
 
  return (
   <>
-   <div className="container">
+   <div className="container" style={{ minHeight: '100vh' }}>
     <div className="row">
      <div className="col-lg-3"></div>
      <div className="col-lg-6 py-5">

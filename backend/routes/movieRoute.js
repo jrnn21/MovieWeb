@@ -11,6 +11,8 @@ import {
  updateEpByMovie,
  deleteEpByMovie,
  getEpById,
+ getMoviesUpdateToday,
+ getSlide,
 } from '../controller/movieController.js';
 
 const router = express.Router();
@@ -32,5 +34,8 @@ router
  .get(getEpById)
  .put(protect, admin, updateEpByMovie)
  .delete(protect, admin, deleteEpByMovie);
+
+router.route('/update/today').get(getMoviesUpdateToday);
+router.route('/slide/img').get(getSlide);
 
 export default router;

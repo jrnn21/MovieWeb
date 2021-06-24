@@ -1,3 +1,4 @@
+import React from 'react';
 import Banner from './Components/Banner';
 import Navbar from './Components/Navbar';
 import HomeScreen from './Screens/HomeScreen';
@@ -9,6 +10,7 @@ import LoginScreen from './Screens/LoginScreen';
 import AdminPanelScreen from './Screens/AdminPanelScreen';
 import NotFoundScreen from './Screens/NotFoundScreen';
 import VideoPageEdit from './Screens/VideoPageEdit';
+import AdminSlideScreen from './Screens/AdminSlideScreen';
 
 const App = () => {
  return (
@@ -26,16 +28,14 @@ const App = () => {
       path="/adminPanel/movies/page/:pageNumber"
       component={AdminPanelScreen}
      />
-     <Route path="/adminPanel" component={AdminPanelScreen} exact />
-
+     <Route path="/adminPanel/slider" component={AdminSlideScreen} />
+     <Route path="/adminPanel/movies" component={AdminPanelScreen} exact />
+     <Route path="/langdyLogin" component={LoginScreen} />
      <Route path="/somethingScreen" component={SomethingScreen} />
      <Route path="/movies/:mid/episodes/:ep" component={PlayScreen} />
-     <Route path="/langdyLogin" component={LoginScreen} />
-     <Route
-      path="/home/movies/search/page/:pageNumber"
-      component={HomeScreen}
-     />
-     <Route path="/home/movies/page/:pageNumber" component={HomeScreen} />
+     <Route path="/movies/search/page/:pageNumber" component={HomeScreen} />
+     <Route path="/movies/page/:pageNumber" component={HomeScreen} />\
+     <Route path="/movies/:movieType" component={HomeScreen} />
      <Route path="/" component={HomeScreen} exact />
      <Route component={NotFoundScreen} />
     </Switch>

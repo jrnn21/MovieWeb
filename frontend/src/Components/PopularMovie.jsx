@@ -1,25 +1,47 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-multi-carousel/lib/styles.css';
-import VideoCard from './VideoCard';
-import TypeBar from '../Components/TypeBar';
+import axios from 'axios';
+import VisibilitySensor from 'react-visibility-sensor';
+import { useHistory } from 'react-router';
 
 const PopularMovie = () => {
+ const [slides, setSlides] = useState([]);
+ const history = useHistory();
+ useEffect((state) => {
+  async function fetchData() {
+   const { data } = await axios.get('/api/movies/slide/img');
+   if (data) {
+    setSlides(data);
+   }
+  }
+  fetchData();
+ }, []);
+
+ const gotoDetail = (m) => {
+  if (m.episodes.length !== 0) {
+   history.push(`/movies/${m._id}/episodes/${m.episodes[0]._id}`);
+  }
+ };
+
  return (
   <>
-   <div className="position-relative">
+   <div
+    className="position-relative p-1 mb-1"
+    style={{ background: 'rgba(0, 0, 0, 0.8)' }}
+   >
     <Carousel
      additionalTransfrom={0}
      arrows={false}
      autoPlay
-     autoPlaySpeed={2000}
+     autoPlaySpeed={4300}
      centerMode={false}
-     className="pb-2"
-     containerClass="container-with-dots"
+     className=""
+     containerClass="container-with-dots overflow-hidden"
      dotListClass=""
      draggable
      focusOnSelect={false}
-     infinite
+     infinite={true}
      itemClass=""
      keyBoardControl
      minimumTouchDrag={80}
@@ -55,44 +77,36 @@ const PopularMovie = () => {
      sliderClass=""
      slidesToSlide={1}
      swipeable
+     transitionDuration={0}
     >
-     <img
-      className="w-100"
-      src="https://wallpaperaccess.com/full/2461288.jpg"
-      alt=""
-     />
-     <img
-      className="w-100"
-      src="https://wallpaperaccess.com/full/2461293.jpg"
-      alt=""
-     />
-     <img
-      className="w-100"
-      src="https://wallpapercave.com/wp/wp6415208.jpg"
-      alt=""
-     />
-     <img
-      className="w-100"
-      src="https://wallpaperaccess.com/full/2461309.jpg"
-      alt=""
-     />
-     <img
-      className="w-100"
-      src="https://wallpaperaccess.com/full/2461289.jpg"
-      alt=""
-     />
-     <img
-      className="w-100"
-      src="https://wallpaperaccess.com/full/2461301.jpg"
-      alt=""
-     />
+     {slides.map((m) => (
+      <div
+       key={m._id}
+       className="w-100 position-relative videoCard"
+       onClick={() => gotoDetail(m)}
+      >
+       <img className="w-100" src={m.slideImg} alt="" />
+       <div
+        className="position-absolute w-100 py-3 px-4 carasal"
+        style={{ bottom: 0, height: 50 }}
+       >
+        <VisibilitySensor className="w-100">
+         {({ isVisible }) => (
+          <div
+           className={`w-100 ${
+            isVisible ? 'slideAnimate visible' : 'invisible'
+           }`}
+          >
+           <h6 className={`text-warning text-end khFont mt-1 w-100`}>
+            {m.movieName}
+           </h6>
+          </div>
+         )}
+        </VisibilitySensor>
+       </div>
+      </div>
+     ))}
     </Carousel>
-    <div
-     className="w-100 position-absolute carasal d-flex justify-content-center"
-     style={{ height: '40px', bottom: '5px' }}
-    >
-     <h5 className="text-warning khFont mt-3">រឿងកំពុងល្បី</h5>
-    </div>
    </div>
   </>
  );

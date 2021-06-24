@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { IoPlaySharp } from 'react-icons/io5';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import {
  createEpByMovieId,
  createMovie,
@@ -16,6 +15,8 @@ import {
  EP_LIST_RESET,
  MOVIE_DETAIL_RESET,
 } from '../Constants/MovieConstants';
+import LoaderButton from '../Components/LoaderButton';
+import AdminSite from '../Components/AdminSite';
 
 const VideoPageEdit = ({ match, history }) => {
  const movieId = match.params.mid;
@@ -27,6 +28,7 @@ const VideoPageEdit = ({ match, history }) => {
   updateMovie: '',
   img: '',
   tag: '',
+  slideImg: '',
  });
  const [deletedMovie, setDeletedMovie] = useState(false);
  const [updateMovie, setUpdateMovie] = useState(false);
@@ -36,12 +38,6 @@ const VideoPageEdit = ({ match, history }) => {
 
  const userLogin = useSelector((state) => state.userLogin);
  const { userIn } = userLogin;
- const config = {
-  headers: {
-   'Content-Type': 'application/json',
-   Authorization: `Bearer ${userIn.token}`,
-  },
- };
  const movieDetail = useSelector((state) => state.movieDetail);
  const { loading: loadingMDetail, error: errorMDetail, movie } = movieDetail;
  const epByMovie = useSelector((state) => state.epByMovie);
@@ -57,7 +53,6 @@ const VideoPageEdit = ({ match, history }) => {
   if (!movie || movie._id !== movieId) {
    dispatch(getMovieById(movieId));
   } else {
-   console.log(movie);
    setMovieEdit({
     ...movieEdit,
     id: movie._id,
@@ -66,6 +61,7 @@ const VideoPageEdit = ({ match, history }) => {
     updateMovie: movie.updateMovie,
     img: movie.img,
     tag: movie.tag,
+    slideImg: movie.slideImg || '',
    });
   }
  }, [dispatch, movieId, movie]);
@@ -107,33 +103,54 @@ const VideoPageEdit = ({ match, history }) => {
  };
 
  const deleteMovieHandler = () => {
+  const config = {
+   headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${userIn.token}`,
+   },
+  };
   if (window.confirm('Are you want to delete?')) {
-   async function createData() {
+   async function deleteData() {
     try {
      setDeletedMovie(true);
-     const gg = await axios.post('/api/uploads/img/delete', {
+     await axios.post('/api/uploads/img/delete', {
       img: movie.img,
+     });
+     await axios.post('/api/uploads/img/delete/slide', {
+      slideImg: movie.slideImg,
      });
      const { data } = await axios.delete(`/api/movies/${movieId}`, config);
      if (data) {
       setDeletedMovie(false);
-      history.push(`/adminPanel`);
+      history.push(`/adminPanel/movies`);
      }
     } catch (error) {
      console.log(error);
     }
    }
-   createData();
+   deleteData();
   }
  };
 
  const updateMovieHandler = () => {
+  const config = {
+   headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${userIn.token}`,
+   },
+  };
   async function updateData() {
    try {
     setUpdateMovie(true);
     if (movie.img !== movieEdit.img) {
-     const gg = await axios.post('/api/uploads/img/delete', {
+     await axios.post('/api/uploads/img/delete', {
       img: movie.img,
+     });
+    }
+
+    if (movie.slideImg !== movieEdit.slideImg) {
+     await axios.post('/api/uploads/img/delete/slide', {
+      slideImg: movie.slideImg,
      });
     }
 
@@ -144,6 +161,8 @@ const VideoPageEdit = ({ match, history }) => {
     );
     if (data) {
      setUpdateMovie(false);
+     dispatch({ type: MOVIE_DETAIL_RESET });
+     history.push('/adminPanel/movies');
     }
    } catch (error) {
     console.log(error);
@@ -176,6 +195,30 @@ const VideoPageEdit = ({ match, history }) => {
   }
  };
 
+ const uploadSlideHandler = async (e) => {
+  const file = e.target.files[0];
+  const formData = new FormData();
+  formData.append('image', file);
+  setUploading(true);
+
+  try {
+   const config = {
+    headers: {
+     'Content-Type': 'multipart/form-data',
+     Authorization: `Bearer ${userIn.token}`,
+    },
+   };
+
+   const { data } = await axios.post('/api/uploads/img', formData, config);
+
+   setMovieEdit({ ...movieEdit, slideImg: data });
+   setUploading(false);
+  } catch (error) {
+   console.error(error);
+   setUploading(false);
+  }
+ };
+
  const epSubmitHandler = (e) => {
   e.preventDefault();
   if (video.vid === 0) {
@@ -192,250 +235,285 @@ const VideoPageEdit = ({ match, history }) => {
   resetVideo();
  };
 
- return (
-  <>
-   <div className="container ">
-    <h2 className="text-center khFont mt-2">គេហទំព័រកែសម្រួលវីឌីអូ</h2>
-    <div className="row row-cols-2">
-     <div className="col">
-      <h4 className="khFont text-center">កែសម្រួលវិឌីអូ</h4>
-      <form className="align-self-center w-100">
-       <div className="row mb-3">
-        <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">
-         ឈ្មោះរឿង
-        </label>
-        <div className="col-sm-10">
-         <input
-          type="text"
-          className="form-control khFont"
-          id="inputEmail3"
-          name="movieName"
-          defaultValue={movieEdit.movieName}
-          onChange={movieNameOnChange}
-          required
-         />
-        </div>
-       </div>
-       <div className="row mb-3">
-        <label htmlFor="inputPassword3" className="col-sm-2 col-form-label">
-         ប្រភេទរឿង
-        </label>
-        <div className="col-sm-10">
-         <select
-          className="form-select w-25 khFont"
-          aria-label="Default select example"
-          name="movieType"
-          value={movieEdit.movieType}
-          onChange={movieTypeOnChange}
-         >
-          <option value="រឿងចិនបុរាណ">រឿងចិនបុរាណ</option>
-          <option value="រឿងភាគជប៉ុន">រឿងភាគជប៉ុន</option>
-          <option value="រឿងភាគថៃ">រឿងភាគថៃ</option>
-         </select>
-        </div>
-       </div>
-       <div className="row mb-3">
-        <label htmlFor="inputPassword3" className="col-sm-2 col-form-label">
-         រឿង
-        </label>
-        <div className="col-sm-10 d-flex">
-         <select
-          className="form-select w-25 khFont me-2"
-          aria-label="Default select example"
-          value={movieEdit.updateMovie}
-          onChange={movieUpdateOnChange}
-         >
-          <option value="ថ្មី">ថ្មី</option>
-          <option value="មានភាគត">មានភាគត</option>
-          <option value="ចប់">ចប់</option>
-          <option value="មិនដាក់">មិនដាក់</option>
-         </select>
-         <input
-          className="form-control w-25 khFont"
-          type="text"
-          value={movieEdit.updateMovie}
-          onChange={movieUpdateOnChange}
-         />
-        </div>
-       </div>
+ const slideImgOnChange = () => {
+  setMovieEdit({
+   ...movieEdit,
+   slideImg: '/uploads/videoUploads/default-slide.jpg',
+  });
+ };
 
-       <div className="row mb-3">
-        <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">
-         ថេក(tag)
-        </label>
-        <div className="col-sm-10">
-         <textarea
-          className="form-control khFont"
-          id="floatingTextarea2"
-          style={{ height: '100px' }}
-          onChange={movieTagOnChange}
-          value={movieEdit.tag}
-         />
-        </div>
-       </div>
-       <div className="row mb-3">
-        <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">
-         លីងរូបភាព
-        </label>
-        <div className="col-sm-10">
-         <input
-          type="text"
-          className="form-control khFont"
-          id="inputEmail3"
-          required
-          defaultValue={movieEdit.img}
-          readOnly
-         />
-        </div>
-       </div>
-       <div className="row mb-3">
-        <label
-         htmlFor="inputEmail3"
-         className="col-sm-2 col-form-label"
-        ></label>
-        <div className="col-sm-10">
-         <input
-          className="form-control"
-          type="file"
-          id="formFile"
-          onChange={uploadFileHandler}
-         />
-        </div>
-       </div>
-       <img className="mb-2" width="40%" src={movieEdit.img} alt="" />
-      </form>
-     </div>
-     <div className="col">
+ if (userIn && userIn.isAdmin) {
+  return (
+   <>
+    <div className="container text-light" style={{ minHeight: '100vh' }}>
+     <h4 className="text-center text-warning khFont mt-2">
+      គេហទំព័រកែសម្រួលវីឌីអូ
+     </h4>
+     <div className="d-flex">
       <div>
-       <h4 className="khFont text-center">កែសម្រួលភាគ</h4>
-       <form className="align-self-center w-100" onSubmit={epSubmitHandler}>
-        <div className="row mb-3">
-         <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">
-          ភាគទី
-         </label>
-         <div className="col-sm-10">
-          <input
-           type="text"
-           className="form-control khFont"
-           onChange={videoEpHandler}
-           value={video.name}
-           required
-          />
-         </div>
-        </div>
-        <div className="row mb-3">
-         <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">
-          លីងវីឌីអូ
-         </label>
-         <div className="col-sm-10">
-          <input
-           type="text"
-           className="form-control khFont"
-           onChange={videoLinkHandler}
-           value={video.url}
-           required
-          />
-         </div>
-        </div>
-
-        <div className="d-flex justify-content-end">
-         {video.vid === 0 ? (
-          <button type="submit" className="btn btn-success me-2 khFont">
-           បន្ថែមវីឌីអូថ្មី
-          </button>
-         ) : (
-          <>
-           <button type="submit" className="btn btn-warning me-2 khFont">
-            កែប្រែវីឌីអូ
-           </button>
-           <button
-            type="button"
-            className="btn btn-danger me-2 khFont"
-            onClick={deleteEpHandler}
-           >
-            លុបវីឌីអូ
-           </button>
-          </>
-         )}
-
-         <button
-          type="button"
-          className="btn btn-secondary khFont"
-          onClick={resetVideo}
-         >
-          បោះបង់
-         </button>
-        </div>
-       </form>
-
-       <h5 className="khFont bg-dark text-light p-3 m-0 mt-2">ភាគរឿង៖</h5>
-       <div className="ep mb-2">
-        {episodes &&
-         episodes.map((ep) => (
-          <div
-           className={`khFont shadow video border ${
-            video.vid === ep._id ? 'bg-secondary' : 'bg-light'
-           }`}
-           key={ep._id}
-           onClick={() => episodeEditHandler(ep)}
-          >
-           <IoPlaySharp className="me-2 mb-1" />
-           {ep.episode}
+       <AdminSite />
+      </div>
+      <div className="w-100">
+       <div className="row row-cols-2">
+        <div className="col">
+         <form className="align-self-center w-100">
+          <div className="row mb-3">
+           <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+            ឈ្មោះរឿង
+           </label>
+           <div className="col-sm-10">
+            <input
+             type="text"
+             className="form-control khFont"
+             id="inputEmail3"
+             name="movieName"
+             defaultValue={movieEdit.movieName}
+             onChange={movieNameOnChange}
+             required
+            />
+           </div>
           </div>
-         ))}
+          <div className="row mb-3">
+           <label htmlFor="inputPassword3" className="col-sm-2 col-form-label">
+            ប្រភេទរឿង
+           </label>
+           <div className="col-sm-10">
+            <select
+             className="form-select w-25 khFont"
+             aria-label="Default select example"
+             name="movieType"
+             value={movieEdit.movieType}
+             onChange={movieTypeOnChange}
+            >
+             <option value="រឿងចិនបុរាណ">រឿងចិនបុរាណ</option>
+             <option value="រឿងភាគជប៉ុន">រឿងភាគជប៉ុន</option>
+             <option value="រឿងភាគថៃ">រឿងភាគថៃ</option>
+            </select>
+           </div>
+          </div>
+          <div className="row mb-3">
+           <label htmlFor="inputPassword3" className="col-sm-2 col-form-label">
+            រឿង
+           </label>
+           <div className="col-sm-10 d-flex">
+            <select
+             className="form-select w-25 khFont me-2"
+             aria-label="Default select example"
+             value={movieEdit.updateMovie}
+             onChange={movieUpdateOnChange}
+            >
+             <option value="ថ្មី">ថ្មី</option>
+             <option value="មានភាគត">មានភាគត</option>
+             <option value="ចប់">ចប់</option>
+             <option value="មិនដាក់">មិនដាក់</option>
+            </select>
+            <input
+             className="form-control w-25 khFont"
+             type="text"
+             value={movieEdit.updateMovie}
+             onChange={movieUpdateOnChange}
+            />
+           </div>
+          </div>
+
+          <div className="row mb-3">
+           <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+            ថេក(tag)
+           </label>
+           <div className="col-sm-10">
+            <textarea
+             className="form-control khFont"
+             id="floatingTextarea2"
+             style={{ height: '100px' }}
+             onChange={movieTagOnChange}
+             value={movieEdit.tag}
+            />
+           </div>
+          </div>
+          <div className="row mb-3">
+           <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+            រូបស្លាយ
+           </label>
+           <div className="col-sm-10">
+            {movieEdit.slideImg === '' ||
+            movieEdit.slideImg ===
+             '/uploads/videoUploads/default-slide.jpg' ? null : (
+             <img className="w-100 mb-2" src={movieEdit.slideImg} alt="" />
+            )}
+
+            <div className="d-flex">
+             <input
+              className="form-control"
+              type="file"
+              id="formFile"
+              onChange={uploadSlideHandler}
+             />
+             {movieEdit.slideImg === '' ||
+             movieEdit.slideImg ===
+              '/uploads/videoUploads/default-slide.jpg' ? null : (
+              <button
+               onClick={slideImgOnChange}
+               className="btn btn-danger khFont ms-2"
+               style={{ width: 80 }}
+              >
+               មិនដាក់
+              </button>
+             )}
+            </div>
+           </div>
+          </div>
+          <div className="row mb-3">
+           <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+            លីងរូបភាព
+           </label>
+           <div className="col-sm-10">
+            <input
+             type="text"
+             className="form-control khFont"
+             id="inputEmail3"
+             required
+             defaultValue={movieEdit.img}
+             readOnly
+            />
+           </div>
+          </div>
+          <div className="row mb-3">
+           <label
+            htmlFor="inputEmail3"
+            className="col-sm-2 col-form-label"
+           ></label>
+           <div className="col-sm-10">
+            <input
+             className="form-control"
+             type="file"
+             id="formFile"
+             onChange={uploadFileHandler}
+            />
+            <img className="my-2" width="40%" src={movieEdit.img} alt="" />
+           </div>
+          </div>
+         </form>
+        </div>
+        <div className="col">
+         <div>
+          <form className="align-self-center w-100" onSubmit={epSubmitHandler}>
+           <div className="row mb-3">
+            <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+             ភាគទី
+            </label>
+            <div className="col-sm-10">
+             <input
+              type="text"
+              className="form-control khFont"
+              onChange={videoEpHandler}
+              value={video.name}
+              required
+             />
+            </div>
+           </div>
+           <div className="row mb-3">
+            <label htmlFor="inputEmail3" className="col-sm-2 col-form-label">
+             លីងវីឌីអូ
+            </label>
+            <div className="col-sm-10">
+             <input
+              type="text"
+              className="form-control khFont"
+              onChange={videoLinkHandler}
+              value={video.url}
+              required
+             />
+            </div>
+           </div>
+
+           <div className="d-flex justify-content-end">
+            {video.vid === 0 ? (
+             <button type="submit" className="btn btn-success me-2 khFont">
+              បន្ថែមវីឌីអូថ្មី
+             </button>
+            ) : (
+             <>
+              <button type="submit" className="btn btn-warning me-2 khFont">
+               កែប្រែវីឌីអូ
+              </button>
+              <button
+               type="button"
+               className="btn btn-danger me-2 khFont"
+               onClick={deleteEpHandler}
+              >
+               លុបវីឌីអូ
+              </button>
+             </>
+            )}
+
+            <button
+             type="button"
+             className="btn btn-secondary khFont"
+             onClick={resetVideo}
+            >
+             បោះបង់
+            </button>
+           </div>
+          </form>
+
+          <div className="rounded border border-dark mt-2">
+           <h6 className="khFont bg-dark text-light p-3 m-0">ភាគរឿង៖</h6>
+           {episodes &&
+            episodes.reverse().map((ep) => (
+             <div
+              key={ep._id}
+              className={`nav-link khFont text-warning navItem ps-4 border-dark border-bottom border-dark ${
+               video.vid === ep._id ? 'bg-dark' : ''
+              }`}
+              onClick={() => episodeEditHandler(ep)}
+             >
+              {ep.episode}
+             </div>
+            ))}
+          </div>
+         </div>
+        </div>
+       </div>
+       <div className="">
+        <div className="d-flex justify-content-center">
+         {updateMovie ? (
+          <LoaderButton />
+         ) : (
+          <button
+           type="submit"
+           className="btn btn-success mx-1 khFont"
+           onClick={updateMovieHandler}
+          >
+           រក្សាទុក
+          </button>
+         )}
+         {deletedMovie ? (
+          <LoaderButton />
+         ) : (
+          <button
+           onClick={deleteMovieHandler}
+           className="btn btn-danger khFont mx-1"
+          >
+           លុបរឿង
+          </button>
+         )}
+         <NavLink
+          onClick={() => dispatch({ type: MOVIE_DETAIL_RESET })}
+          to="/adminPanel/movies"
+          className="btn btn-dark khFont mx-1"
+         >
+          ត្រលប់ទៅកាន់អែតមីន
+         </NavLink>
+        </div>
        </div>
       </div>
      </div>
     </div>
-    <div className="">
-     <div className="d-flex justify-content-center">
-      {updateMovie ? (
-       <button className="btn btn-secondary" type="button" disabled>
-        <span
-         className="spinner-border spinner-border-sm"
-         role="status"
-         aria-hidden="true"
-        ></span>
-        Loading...
-       </button>
-      ) : (
-       <button
-        type="submit"
-        className="btn btn-success mx-1 khFont"
-        onClick={updateMovieHandler}
-       >
-        រក្សាទុក
-       </button>
-      )}
-      {deletedMovie ? (
-       <button className="btn btn-secondary" type="button" disabled>
-        <span
-         className="spinner-border spinner-border-sm"
-         role="status"
-         aria-hidden="true"
-        ></span>
-        Loading...
-       </button>
-      ) : (
-       <button
-        onClick={deleteMovieHandler}
-        className="btn btn-danger khFont mx-1"
-       >
-        លុបរឿង
-       </button>
-      )}
-      <NavLink
-       onClick={() => dispatch({ type: MOVIE_DETAIL_RESET })}
-       to="/adminPanel"
-       className="btn btn-dark khFont mx-1"
-      >
-       ត្រលប់ទៅកាន់អែតមីន
-      </NavLink>
-     </div>
-    </div>
-   </div>
-  </>
- );
+   </>
+  );
+ } else {
+  return <Redirect to="/error" />;
+ }
 };
 
 export default VideoPageEdit;

@@ -1,21 +1,31 @@
-@import url('https://fonts.googleapis.com/css2?family=Bayon&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nova+Flat&display=swap');
 * {
- font-family: 'Bayon', cursive;
+ font-family: myriad-pro, Lucida Grande, Arial, 'Kantumruy', 'Siemreap',
+  sans-serif;
 }
 
 body {
- font-family: 'Bayon', cursive;
+ /* font-family: 'Bayon', cursive; */
+ font-family: myriad-pro, Lucida Grande, Arial, 'Kantumruy', 'Siemreap',
+  sans-serif;
  background: rgb(44, 49, 54) !important;
  overflow-y: scroll;
 }
 
 .testColor {
- color: rgb(238, 238, 238);
+ color: #cbe8ff;
+}
+
+.nameMovie:hover {
+ color: rgb(255, 203, 33) !important;
 }
 
 .khFont {
- font-family: 'Bayon', cursive;
+ /* font-family: 'Bayon', cursive; */
+ font-family: myriad-pro, Lucida Grande, Arial, 'Kantumruy', 'Siemreap',
+  sans-serif;
 }
 
 .carasal {
@@ -65,8 +75,8 @@ body {
 
 .loader {
  position: absolute;
- top: 45%;
- left: 45%;
+ top: 47%;
+ left: 47%;
 }
 
 .videoCard:hover {
@@ -80,13 +90,11 @@ body {
  background: -webkit-linear-gradient(
   to top,
   #000000c5,
-  #0000009a,
   #00000000
  ); /* Chrome 10-25, Safari 5.1-6 */
  background: linear-gradient(
   to top,
   #000000c5,
-  #0000009a,
   #00000000
  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
@@ -110,4 +118,54 @@ body {
 
 .t_warning {
  color: rgb(247, 171, 6) !important;
+}
+.t_dark {
+ color: black !important;
+}
+.todayItem:hover {
+ cursor: pointer;
+ box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+}
+
+.slideAnimate {
+ width: 100%;
+ overflow: hidden;
+ /* margin-left: 300px;
+ max-width: 500px; */
+}
+
+.slideAnimate h6 {
+ animation: 2s slide-right forwards;
+ transform: translateX(-100%);
+}
+
+@keyframes slide-right {
+ to {
+  transform: translateX(0);
+ }
+}
+
+.scale:hover {
+ transition: 00.2s;
+ transform: scale(1.2, 1.2);
+}
+
+.notFImg {
+ position: relative;
+ animation-name: example;
+ animation-duration: 0.5s;
+ animation-iteration-count: infinite;
+}
+
+@keyframes example {
+ 0% {
+  left: 0px;
+  top: 0px;
+ }
+ 50% {
+  top: 10px;
+ }
+ 100% {
+  top: 0px;
+ }
 }

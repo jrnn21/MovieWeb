@@ -3,10 +3,13 @@ import React from 'react';
 const NotFoundScreen = () => {
  return (
   <>
-   <div className="container">
-    <h3 className="khFont text-center my-5 ">
+   <div className="container pt-5" style={{ minHeight: '100vh' }}>
+    <div className="d-flex justify-content-center mt-5">
+     <img className="notFImg" src="/uploads\videoUploads\404.png" alt="" />
+    </div>
+    <h5 className="khFont text-center my-5 text-warning">
      មិនមានក្នុងស៊ីសស្ទឹមយើងទេ​ / Not found in our system
-    </h3>
+    </h5>
    </div>
   </>
  );

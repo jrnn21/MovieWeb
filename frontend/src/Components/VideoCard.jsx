@@ -16,7 +16,7 @@ const VideoCard = ({ admin = false, movie }) => {
  return (
   <>
    <div
-    className="card w-100 videoCard position-relative overflow-hidden shadow"
+    className="w-100 videoCard position-relative overflow-hidden shadow"
     style={{ width: '18rem' }}
     onClick={admin ? movieDetail : movieDetailScreen}
    >
@@ -25,12 +25,17 @@ const VideoCard = ({ admin = false, movie }) => {
      src="/uploads/videoUploads/default-image.jpg"
      alt=""
     />
-    <img src={movie.img} className="card-img-top position-absolute" alt="..." />
+    <img
+     style={{ top: 0, left: 0 }}
+     src={movie.img}
+     className="position-absolute w-100 "
+     alt="..."
+    />
     <div className="card-body position-absolute bottom-0 text-light text-center w-100 cardHover">
-     <h6 className="card-title khFont text-warning">{movie.movieName}</h6>
+     {/* <h6 className="card-title khFont text-warning">{movie.movieName}</h6> */}
      <div className="d-flex justify-content-end">
-      <small className="khFont text-right d-inline-block">
-       episodes {movie.episodes.length}
+      <small className="khFont text-right d-inline-block text-warning">
+       ep {movie.episodes.length}
       </small>
      </div>
     </div>
@@ -56,6 +61,13 @@ const VideoCard = ({ admin = false, movie }) => {
      {movie.updateMovie}
     </p>
    </div>
+   <p
+    className="card-title khFont text-light text-center mt-2 px-1 mb-3 nameMovie"
+    style={{ fontSize: '90%', cursor: 'pointer' }}
+    onClick={admin ? movieDetail : movieDetailScreen}
+   >
+    {movie.movieName}
+   </p>
   </>
  );
 };
