@@ -8,12 +8,9 @@ let __dirname = dirname.substring(1, dirname.length - 15);
 
 dotenv.config();
 
-if (process.env.NODE_ENV === 'production') {
- __dirname = dirname.substring(0, dirname.length - 15);
-}
-
-console.log(dirname);
-console.log(__dirname);
+// if (process.env.NODE_ENV === 'production') {
+//  __dirname = dirname.substring(0, dirname.length - 15);
+// }
 
 const router = express.Router();
 
@@ -69,7 +66,6 @@ router.post('/delete', upload.single('image'), async (req, res) => {
 
 router.post('/delete/slide', upload.single('image'), async (req, res) => {
  const filePath = __dirname + req.body.slideImg;
- console.log(req.body.slideImg);
  try {
   if (
    req.body.slideImg !== '/uploads/videoUploads/default-slide.jpg' &&

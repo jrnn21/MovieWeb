@@ -14,9 +14,7 @@ const Loader = ({ wh = 16, color = false, mg = false }) => {
     margin: `${mg ? mg : 'auto'}`,
     display: 'block',
    }}
-  >
-   {/* <span className="sr-only">Loading...</span> */}
-  </Spinner>
+  ></Spinner>
  );
 };
 

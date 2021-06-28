@@ -172,10 +172,6 @@ const VideoPageEdit = ({ match, history }) => {
     },
    };
 
-   await axios.post('/api/uploads/img/delete', {
-    img: movieEdit.img,
-   });
-
    const { data } = await axios.post('/api/uploads/img', formData, config);
 
    if (data) {
@@ -185,6 +181,11 @@ const VideoPageEdit = ({ match, history }) => {
       Authorization: `Bearer ${userIn.token}`,
      },
     };
+    await axios.post('/api/uploads/img/delete', {
+     img: movieEdit.img,
+     config,
+    });
+
     await axios.put(`/api/img/${movieId}/`, { img: data }, config);
 
     setMovieEdit({ ...movieEdit, img: data });
@@ -250,7 +251,7 @@ const VideoPageEdit = ({ match, history }) => {
  };
 
  const slideImgDelete = (e) => {
-  e.preventDefault();
+  // e.preventDefault();
   const config = {
    headers: {
     'Content-Type': 'application/json',
@@ -263,13 +264,14 @@ const VideoPageEdit = ({ match, history }) => {
     { slideImg: '/uploads/videoUploads/default-slide.jpg' },
     config
    );
+   console.log(data);
    if (data) {
     await axios.post('/api/uploads/img/delete/slide', {
      slideImg: movieEdit.slideImg,
     });
     setMovieEdit({
      ...movieEdit,
-     slideImg: '/uploads/videoUploads/default-slide.jpg',
+     slideImg: '',
     });
    }
   }
@@ -387,6 +389,7 @@ const VideoPageEdit = ({ match, history }) => {
              movieEdit.slideImg ===
               '/uploads/videoUploads/default-slide.jpg' ? null : (
               <button
+               type="button"
                onClick={slideImgDelete}
                className="btn btn-danger khFont ms-2"
                style={{ width: 80 }}

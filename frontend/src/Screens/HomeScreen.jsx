@@ -44,93 +44,13 @@ const HomeScreen = ({ match, history }) => {
      rel="icon"
      href="https://image.shutterstock.com/image-vector/outstanding-professional-elegant-trendy-awesome-600w-1247235529.jpg"
     />
-    <title>មើលកម្សាន្ដ​ {keyword ? `- ${keyword}` : ''}</title>
+    <title>Drama855 {keyword ? `- ${keyword}` : ''}</title>
    </Helmet>
    <div
     className="container-fluid pt-5 position-relative d-none"
     style={{ minHeight: 200, background: '#cbe8ff' }}
    >
-    <div className="container">
-     <div className="row">
-      {/* <div className="col-6 col-md-4">
-       <img
-        className="rounded"
-        style={{ width: 100 }}
-        src="https://image.shutterstock.com/image-vector/outstanding-professional-elegant-trendy-awesome-600w-1247235529.jpg"
-        alt=""
-       />
-      </div> */}
-      {/* <div className="col-4 d-flex justify-content-center d-none d-md-block">
-       <div>
-        <div className="d-flex flex-wrap d-none">
-         <img
-          onClick={() => history.push('/movies/ខ្មែរ?keyword=hongmeas')}
-          className="m-1 shadow todayItem scale rounded-3"
-          width="60"
-          src="/uploads/videoUploads/hong.jpg"
-          alt=""
-         />
-         <img
-          onClick={() => history.push('/movies/ខ្មែរ?keyword=mytv')}
-          className="m-1 shadow todayItem scale rounded-3"
-          width="60"
-          src="/uploads/videoUploads/mytv.jpg"
-          alt=""
-         />
-         <img
-          onClick={() => history.push('/movies/ខ្មែរ?keyword=pnn')}
-          className="m-1 shadow todayItem scale rounded"
-          width="60"
-          src="/uploads/videoUploads/pnn.jpg"
-          alt=""
-         />
-         <img
-          onClick={() => history.push('/movies/ខ្មែរ?keyword=ppctv')}
-          className="m-1 shadow todayItem scale rounded-3"
-          width="60"
-          src="/uploads/videoUploads/ppctv5.jpg"
-          alt=""
-         />
-         <img
-          onClick={() => history.push('/movies/ខ្មែរ?keyword=tv5')}
-          className="m-1 shadow todayItem scale rounded-3"
-          width="60"
-          src="/uploads/videoUploads/tv5.jpg"
-          alt=""
-         />
-         <img
-          onClick={() => history.push('/movies/ខ្មែរ?keyword=bayon')}
-          className="m-1 shadow todayItem scale rounded-3"
-          width="60"
-          src="/uploads/videoUploads/bayon.jpg"
-          alt=""
-         />
-         <img
-          onClick={() => history.push('/movies/ខ្មែរ?keyword=ctv8hd')}
-          className="m-1 shadow todayItem scale rounded-3"
-          width="60"
-          src="/uploads/videoUploads/ctv8hd.jpg"
-          alt=""
-         />
-         <img
-          onClick={() => history.push('/movies/ថៃ?keyword=thaitv3')}
-          className="m-1 shadow todayItem scale rounded-3"
-          width="60"
-          src="/uploads/videoUploads/thaitv3.jpg"
-          alt=""
-         />
-         <img
-          onClick={() => history.push('/movies/ថៃ?keyword=thaitv7')}
-          className="m-1 shadow todayItem scale rounded-3"
-          width="60"
-          src="/uploads/videoUploads/thaitv7.jpg"
-          alt=""
-         />
-        </div>
-       </div>
-      </div> */}
-     </div>
-    </div>
+    <div className="container"></div>
    </div>
    <div className="container position-relative" style={{ minHeight: '100vh' }}>
     <div className="row">

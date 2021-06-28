@@ -32,7 +32,6 @@ const VideoCard = ({ admin = false, movie }) => {
      alt="..."
     />
     <div className="card-body position-absolute bottom-0 text-light text-center w-100 cardHover">
-     {/* <h6 className="card-title khFont text-warning">{movie.movieName}</h6> */}
      <div className="d-flex justify-content-end">
       <small className="khFont text-right d-inline-block text-warning">
        ep {movie.episodes.length}
