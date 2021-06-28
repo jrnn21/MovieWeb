@@ -5,6 +5,9 @@ import fs from 'fs';
 const dirname = path.dirname(new URL(import.meta.url).pathname);
 const __dirname = dirname.substring(1, dirname.length - 15);
 
+console.log(dirname);
+console.log(__dirname);
+
 const router = express.Router();
 
 const storage = multer.diskStorage({
@@ -49,7 +52,7 @@ router.post('/delete', upload.single('image'), async (req, res) => {
    res.json({ suc: 'gg' });
   }
  } catch (err) {
-  console.error(err);
+  // res.json({ suc: 'gg' });
  }
 });
 
