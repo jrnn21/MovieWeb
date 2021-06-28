@@ -7,6 +7,7 @@ import morgan from 'morgan';
 import movieRoute from './routes/movieRoute.js';
 import userRoute from './routes/userRouter.js';
 import uploadRoutes from './routes/uploadRoutes.js';
+import imgRoute from './routes/imgRoute.js';
 import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 dotenv.config();
@@ -19,6 +20,7 @@ if (process.env.NODE_ENV === 'development') {
 
 app.use(express.json());
 app.use('/api/movies', movieRoute);
+app.use('/api/img', imgRoute);
 app.use('/api/users', userRoute);
 app.use('/api/uploads/img', uploadRoutes);
 

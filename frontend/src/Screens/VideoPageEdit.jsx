@@ -39,9 +39,9 @@ const VideoPageEdit = ({ match, history }) => {
  const userLogin = useSelector((state) => state.userLogin);
  const { userIn } = userLogin;
  const movieDetail = useSelector((state) => state.movieDetail);
- const { loading: loadingMDetail, error: errorMDetail, movie } = movieDetail;
+ const { movie } = movieDetail;
  const epByMovie = useSelector((state) => state.epByMovie);
- const { loading: epLoading, error: epError, episodes } = epByMovie;
+ const { episodes } = epByMovie;
  const createEpByMovie = useSelector((state) => state.createEpByMovie);
  const { success: createEpSuccess } = createEpByMovie;
  const updateEpByMovie = useSelector((state) => state.updateEpByMovie);
@@ -65,6 +65,8 @@ const VideoPageEdit = ({ match, history }) => {
    });
   }
  }, [dispatch, movieId, movie]);
+
+ console.log(movie);
 
  useEffect(() => {
   dispatch({ type: EP_CREATE_RESET });
@@ -142,17 +144,6 @@ const VideoPageEdit = ({ match, history }) => {
   async function updateData() {
    try {
     setUpdateMovie(true);
-    if (movie.img !== movieEdit.img) {
-     await axios.post('/api/uploads/img/delete', {
-      img: movie.img,
-     });
-    }
-
-    if (movie.slideImg !== movieEdit.slideImg) {
-     await axios.post('/api/uploads/img/delete/slide', {
-      slideImg: movie.slideImg,
-     });
-    }
 
     const { data } = await axios.put(
      `/api/movies/${movieId}`,
@@ -185,10 +176,24 @@ const VideoPageEdit = ({ match, history }) => {
     },
    };
 
+   await axios.post('/api/uploads/img/delete', {
+    img: movieEdit.img,
+   });
+
    const { data } = await axios.post('/api/uploads/img', formData, config);
 
-   setMovieEdit({ ...movieEdit, img: data });
-   setUploading(false);
+   if (data) {
+    const config = {
+     headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${userIn.token}`,
+     },
+    };
+    await axios.put(`/api/img/${movieId}/`, { img: data }, config);
+
+    setMovieEdit({ ...movieEdit, img: data });
+    setUploading(false);
+   }
   } catch (error) {
    console.error(error);
    setUploading(false);
@@ -209,10 +214,23 @@ const VideoPageEdit = ({ match, history }) => {
     },
    };
 
-   const { data } = await axios.post('/api/uploads/img', formData, config);
+   await axios.post('/api/uploads/img/delete/slide', {
+    slideImg: movieEdit.slideImg,
+   });
 
-   setMovieEdit({ ...movieEdit, slideImg: data });
-   setUploading(false);
+   const { data } = await axios.post('/api/uploads/img', formData, config);
+   if (data) {
+    const config = {
+     headers: {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${userIn.token}`,
+     },
+    };
+    await axios.put(`/api/img/${movieId}/slide`, { slideImg: data }, config);
+
+    setMovieEdit({ ...movieEdit, slideImg: data });
+    setUploading(false);
+   }
   } catch (error) {
    console.error(error);
    setUploading(false);
@@ -235,7 +253,22 @@ const VideoPageEdit = ({ match, history }) => {
   resetVideo();
  };
 
- const slideImgOnChange = () => {
+ const slideImgDelete = async () => {
+  await axios.post('/api/uploads/img/delete/slide', {
+   slideImg: movieEdit.slideImg,
+  });
+
+  const config = {
+   headers: {
+    'Content-Type': 'application/json',
+    Authorization: `Bearer ${userIn.token}`,
+   },
+  };
+  await axios.put(
+   `/api/img/${movieId}/slide`,
+   { slideImg: '/uploads/videoUploads/default-slide.jpg' },
+   config
+  );
   setMovieEdit({
    ...movieEdit,
    slideImg: '/uploads/videoUploads/default-slide.jpg',
@@ -352,7 +385,7 @@ const VideoPageEdit = ({ match, history }) => {
              movieEdit.slideImg ===
               '/uploads/videoUploads/default-slide.jpg' ? null : (
               <button
-               onClick={slideImgOnChange}
+               onClick={slideImgDelete}
                className="btn btn-danger khFont ms-2"
                style={{ width: 80 }}
               >

@@ -134,6 +134,42 @@ const updateMovie = asyncHandler(async (req, res) => {
  }
 });
 
+//@desc    Update movie
+//@route   PUT /api/img/:mid
+//@access  Private Admin
+const updateMovieImg = asyncHandler(async (req, res) => {
+ const mid = req.params.mid;
+ const { img } = req.body;
+ const movie = await Movie.findById(mid);
+ console.log(req.body);
+ if (movie) {
+  movie.img = img;
+  const movieUpdate = await movie.save();
+  res.json(movieUpdate.img);
+ } else {
+  res.status(404);
+  throw new Error(`Movie not Found! Can't be Updated`);
+ }
+});
+
+//@desc    Update movie
+//@route   PUT /api/img/:mid/slide
+//@access  Private Admin
+const updateMovieSlide = asyncHandler(async (req, res) => {
+ const mid = req.params.mid;
+ const { slideImg } = req.body;
+ const movie = await Movie.findById(mid);
+ console.log(req.body);
+ if (movie) {
+  movie.slideImg = slideImg || '/uploads/videoUploads/default-slide.jpg';
+  const movieUpdate = await movie.save();
+  res.json(movieUpdate.img);
+ } else {
+  res.status(404);
+  throw new Error(`Movie not Found! Can't be Updated`);
+ }
+});
+
 //@desc    Fetch video movie
 //@route   GET /api/movies/:mid/episodes
 //@access  Public
@@ -245,4 +281,6 @@ export {
  getEpById,
  getMoviesUpdateToday,
  getSlide,
+ updateMovieImg,
+ updateMovieSlide,
 };

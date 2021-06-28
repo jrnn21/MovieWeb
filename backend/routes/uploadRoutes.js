@@ -52,14 +52,16 @@ router.post('/', upload.single('image'), (req, res) => {
 router.post('/delete', upload.single('image'), async (req, res) => {
  const filePath = __dirname + req.body.img;
  try {
-  if (req.body.img !== '/uploads/videoUploads/default-image.jpg') {
+  if (
+   req.body.img !== '/uploads/videoUploads/default-image.jpg' &&
+   req.body.img !== undefined
+  ) {
    fs.unlinkSync(filePath);
    res.json({ suc: 'gg' });
   } else {
    res.json({ suc: 'gg' });
   }
  } catch (err) {
-  // res.json({ suc: 'gg' });
   console.log(err);
  }
 });
