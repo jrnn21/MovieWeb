@@ -60,6 +60,7 @@ router.post('/delete', upload.single('image'), async (req, res) => {
   }
  } catch (err) {
   // res.json({ suc: 'gg' });
+  console.log(err);
  }
 });
 
