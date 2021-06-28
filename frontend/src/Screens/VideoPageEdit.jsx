@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, Redirect } from 'react-router-dom';
 import {
  createEpByMovieId,
- createMovie,
  deleteEpByMovieId,
  getEpByMovie,
  getMovieById,
@@ -12,7 +11,6 @@ import {
 import axios from 'axios';
 import {
  EP_CREATE_RESET,
- EP_LIST_RESET,
  MOVIE_DETAIL_RESET,
 } from '../Constants/MovieConstants';
 import LoaderButton from '../Components/LoaderButton';
@@ -66,11 +64,9 @@ const VideoPageEdit = ({ match, history }) => {
   }
  }, [dispatch, movieId, movie]);
 
- console.log(movie);
-
  useEffect(() => {
   dispatch({ type: EP_CREATE_RESET });
-  dispatch(getEpByMovie(movieId));
+  dispatch(getEpByMovie(movieId, 'desc'));
  }, [dispatch, movieId, createEpSuccess, updateEpSuccess, deleteEpSuccess]);
 
  //  onchange
@@ -253,26 +249,32 @@ const VideoPageEdit = ({ match, history }) => {
   resetVideo();
  };
 
- const slideImgDelete = async () => {
-  await axios.post('/api/uploads/img/delete/slide', {
-   slideImg: movieEdit.slideImg,
-  });
-
+ const slideImgDelete = (e) => {
+  e.preventDefault();
   const config = {
    headers: {
     'Content-Type': 'application/json',
     Authorization: `Bearer ${userIn.token}`,
    },
   };
-  await axios.put(
-   `/api/img/${movieId}/slide`,
-   { slideImg: '/uploads/videoUploads/default-slide.jpg' },
-   config
-  );
-  setMovieEdit({
-   ...movieEdit,
-   slideImg: '/uploads/videoUploads/default-slide.jpg',
-  });
+  async function deleteSilde() {
+   const { data } = await axios.put(
+    `/api/img/${movieId}/slide`,
+    { slideImg: '/uploads/videoUploads/default-slide.jpg' },
+    config
+   );
+   if (data) {
+    await axios.post('/api/uploads/img/delete/slide', {
+     slideImg: movieEdit.slideImg,
+    });
+    setMovieEdit({
+     ...movieEdit,
+     slideImg: '/uploads/videoUploads/default-slide.jpg',
+    });
+   }
+  }
+
+  deleteSilde();
  };
 
  if (userIn && userIn.isAdmin) {
@@ -492,7 +494,7 @@ const VideoPageEdit = ({ match, history }) => {
           <div className="rounded border border-dark mt-2">
            <h6 className="khFont bg-dark text-light p-3 m-0">ភាគរឿង៖</h6>
            {episodes &&
-            episodes.reverse().map((ep) => (
+            episodes.map((ep) => (
              <div
               key={ep._id}
               className={`nav-link khFont text-warning navItem ps-4 border-dark border-bottom border-dark ${

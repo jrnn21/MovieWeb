@@ -175,10 +175,16 @@ const updateMovieSlide = asyncHandler(async (req, res) => {
 //@access  Public
 const getEpByMovie = asyncHandler(async (req, res) => {
  const mid = req.params.mid;
+ const sort = req.query.sort;
+
  const movie = await Movie.findById(mid);
  if (movie) {
   const epByMovie = movie.episodes;
-  res.json(epByMovie);
+  if (sort === 'desc') {
+   res.json(epByMovie.reverse());
+  } else {
+   res.json(epByMovie);
+  }
  } else {
   res.status(404);
   throw new Error(`Movie not Found! Can't get Ep`);

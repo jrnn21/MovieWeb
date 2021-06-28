@@ -82,10 +82,10 @@ export const createMovie = () => async (dispatch, getState) => {
  }
 };
 
-export const getEpByMovie = (mid) => async (dispatch) => {
+export const getEpByMovie = (mid, sssss) => async (dispatch) => {
  try {
   //   dispatch({ type: EP_LIST_REQUEST });
-  const { data } = await axios.get(`/api/movies/${mid}/episodes`);
+  const { data } = await axios.get(`/api/movies/${mid}/episodes?sort=${sssss}`);
   dispatch({ type: EP_LIST_SUCCESS, payload: data });
  } catch (error) {
   dispatch({

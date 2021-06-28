@@ -72,7 +72,8 @@ router.post('/delete/slide', upload.single('image'), async (req, res) => {
  try {
   if (
    req.body.slideImg !== '/uploads/videoUploads/default-slide.jpg' &&
-   req.body.slideImg !== undefined
+   req.body.slideImg !== undefined &&
+   req.body.slideImg !== ''
   ) {
    fs.unlinkSync(filePath);
    res.json({ suc: 'gg' });

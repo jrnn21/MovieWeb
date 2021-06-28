@@ -7,13 +7,9 @@ import axios from 'axios';
 import Loader from '../Components/Loader';
 import {
  EP_CREATE_RESET,
- EP_LIST_RESET,
  MOVIE_DETAIL_RESET,
 } from '../Constants/MovieConstants';
 import MovieToday from '../Components/MovieToday';
-import NoVideo from '../Components/NoVideo';
-import NotFoundScreen from './NotFoundScreen';
-import Message from '../Components/Message';
 
 const PlayScreen = ({ match, history }) => {
  const { mid, ep } = match.params;
@@ -24,7 +20,7 @@ const PlayScreen = ({ match, history }) => {
  const movieDetail = useSelector((state) => state.movieDetail);
  const { loading, error, movie } = movieDetail;
  const epByMovie = useSelector((state) => state.epByMovie);
- const { loading: epLoading, error: epError, episodes } = epByMovie;
+ const { episodes } = epByMovie;
 
  useEffect(() => {
   dispatch({ type: MOVIE_DETAIL_RESET });
@@ -35,7 +31,7 @@ const PlayScreen = ({ match, history }) => {
   window.scroll(0, 0);
   // dispatch({ type: EP_LIST_RESET });
   dispatch({ type: EP_CREATE_RESET });
-  dispatch(getEpByMovie(mid));
+  dispatch(getEpByMovie(mid, 'asc'));
 
   async function fetchData() {
    setLoadingEp(true);
