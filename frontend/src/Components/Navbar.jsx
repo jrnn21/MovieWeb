@@ -18,14 +18,7 @@ const Navbar = () => {
  const userLogin = useSelector((state) => state.userLogin);
  const { userIn } = userLogin;
  const movieList = useSelector((state) => state.movieList);
- const {
-  loading: movieListLoading,
-  error: movieListError,
-  movies,
-  page,
-  pages,
-  count,
- } = movieList;
+ const { loading: movieListLoading } = movieList;
 
  const logoutHandler = () => {
   if (window.confirm('Are you sure?')) {
@@ -58,7 +51,7 @@ const Navbar = () => {
     >
      <div className="container-lg">
       <Link to={'/'} className="navbar-brand text-warning">
-       មើលកម្សាន្ដ
+       Drama855
       </Link>
       <div className="col-6 col-md-4 d-lg-none">
        <form className="d-flex w-100" onSubmit={searchSubmit}>
