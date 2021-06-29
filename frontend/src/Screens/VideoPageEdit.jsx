@@ -181,10 +181,10 @@ const VideoPageEdit = ({ match, history }) => {
       Authorization: `Bearer ${userIn.token}`,
      },
     };
-    await axios.post('/api/uploads/img/delete', {
-     img: movieEdit.img,
-     config,
-    });
+    // await axios.post('/api/uploads/img/delete', {
+    //  img: movieEdit.img,
+    //  config,
+    // });
 
     await axios.put(`/api/img/${movieId}/`, { img: data }, config);
 
