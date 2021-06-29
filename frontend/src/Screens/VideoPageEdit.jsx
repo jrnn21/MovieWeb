@@ -496,23 +496,28 @@ const VideoPageEdit = ({ match, history }) => {
 
           <div className="rounded border border-dark mt-2">
            <h6 className="khFont bg-dark text-light p-3 m-0">ភាគរឿង៖</h6>
-           {episodes &&
-            episodes.map((ep) => (
-             <div
-              key={ep._id}
-              className={`nav-link khFont text-warning navItem ps-4 border-dark border-bottom border-dark ${
-               video.vid === ep._id ? 'bg-dark' : ''
-              }`}
-              onClick={() => episodeEditHandler(ep)}
-             >
-              {ep.episode}
-             </div>
-            ))}
+           <div
+            className="w-100"
+            style={{ maxHeight: '60vh', overflowY: 'auto' }}
+           >
+            {episodes &&
+             episodes.map((ep) => (
+              <div
+               key={ep._id}
+               className={`nav-link khFont text-warning navItem ps-4 border-dark border-bottom border-dark ${
+                video.vid === ep._id ? 'bg-dark' : ''
+               }`}
+               onClick={() => episodeEditHandler(ep)}
+              >
+               {ep.episode}
+              </div>
+             ))}
+           </div>
           </div>
          </div>
         </div>
        </div>
-       <div className="">
+       <div className="mt-3">
         <div className="d-flex justify-content-center">
          {updateMovie ? (
           <LoaderButton />
