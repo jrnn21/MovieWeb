@@ -1,14 +1,22 @@
 import React from 'react';
-import { useHistory } from 'react-router';
 import { BiPlayCircle } from 'react-icons/bi';
+import axios from 'axios';
+import { MOVIE_DETAIL_SUCCESS } from '../Constants/MovieConstants';
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 const VideoCard = ({ admin = false, movie }) => {
+ const dispatch = useDispatch();
  const history = useHistory();
  const movieDetail = () => {
   history.push(`/adminPanel/movies/${movie._id}/edit`);
  };
- const movieDetailScreen = () => {
-  history.push(`/movies/${movie._id}`);
+ const movieDetailScreen = async () => {
+  const { data } = await axios.get(`/api/movies/${movie._id}`);
+  if (data) {
+   dispatch({ type: MOVIE_DETAIL_SUCCESS, payload: data });
+   history.push(`/movies/${movie._id}`);
+  }
  };
 
  return (

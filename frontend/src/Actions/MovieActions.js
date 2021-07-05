@@ -43,7 +43,7 @@ export const getMovies = (pageNumber, keyword) => async (dispatch) => {
 
 export const getMovieById = (movieId) => async (dispatch) => {
  try {
-  dispatch({ type: MOVIE_DETAIL_REQUEST });
+  //   dispatch({ type: MOVIE_DETAIL_REQUEST });
   const { data } = await axios.get(`/api/movies/${movieId}`);
   dispatch({ type: MOVIE_DETAIL_SUCCESS, payload: data });
  } catch (error) {
