@@ -102,39 +102,29 @@ const Navbar = () => {
        <ul className="navbar-nav me-auto mb-2 mb-lg-0">
         <li className="nav-item ms-1">
          <NavLink
-          to={`/`}
-          exact={true}
+          to="/movies/khmer/page/1?keyword=khmer"
           className="nav-link rounded fs-6 navItem px-4 text-warning"
           activeClassName="bg-dark navItemColor t_warning"
          >
-          ផេកដើម
+          KHMER
          </NavLink>
         </li>
         <li className="nav-item ms-1">
          <NavLink
-          to="/movies/ខ្មែរ?keyword=ខ្មែរ"
+          to="/movies/thai/page/1?keyword=thai"
           className="nav-link rounded fs-6 navItem px-4 text-warning"
           activeClassName="bg-dark navItemColor t_warning"
          >
-          ខ្មែរ
+          THAI
          </NavLink>
         </li>
         <li className="nav-item ms-1">
          <NavLink
-          to="/movies/ថៃ?keyword=ថៃ"
+          to="/movies/china/page/1?keyword=china"
           className="nav-link rounded fs-6 navItem px-4 text-warning"
           activeClassName="bg-dark navItemColor t_warning"
          >
-          ថៃ
-         </NavLink>
-        </li>
-        <li className="nav-item ms-1">
-         <NavLink
-          to="/movies/ចិន?keyword=ចិន"
-          className="nav-link rounded fs-6 navItem px-4 text-warning"
-          activeClassName="bg-dark navItemColor t_warning"
-         >
-          ចិន
+          CHAINESE
          </NavLink>
         </li>
         <li className="nav-item dropdown">

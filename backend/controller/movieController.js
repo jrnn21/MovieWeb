@@ -45,7 +45,7 @@ const getMoviesUpdateToday = asyncHandler(async (req, res) => {
 //@route   GET /api/search/movies
 //@access  Public
 const getMovies = asyncHandler(async (req, res) => {
- const pageSize = 24;
+ const pageSize = 12;
  const page = Number(req.query.pageNumber) || 1;
 
  const keyword = req.query.keyword

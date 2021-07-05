@@ -8,9 +8,7 @@ const VideoCard = ({ admin = false, movie }) => {
   history.push(`/adminPanel/movies/${movie._id}/edit`);
  };
  const movieDetailScreen = () => {
-  if (movie && movie.episodes.length !== 0) {
-   history.push(`/movies/${movie._id}/episodes/${movie.episodes[0]._id}`);
-  }
+  history.push(`/movies/${movie._id}`);
  };
 
  return (

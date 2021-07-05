@@ -11,6 +11,7 @@ import AdminPanelScreen from './Screens/AdminPanelScreen';
 import NotFoundScreen from './Screens/NotFoundScreen';
 import VideoPageEdit from './Screens/VideoPageEdit';
 import AdminSlideScreen from './Screens/AdminSlideScreen';
+import MovieDetailScreen from './Screens/MovieDetailScreen';
 
 const App = () => {
  return (
@@ -33,9 +34,19 @@ const App = () => {
      <Route path="/langdyLogin" component={LoginScreen} />
      <Route path="/somethingScreen" component={SomethingScreen} />
      <Route path="/movies/:mid/episodes/:ep" component={PlayScreen} />
-     <Route path="/movies/search/page/:pageNumber" component={HomeScreen} />
-     <Route path="/movies/page/:pageNumber" component={HomeScreen} />\
-     <Route path="/movies/:movieType" component={HomeScreen} />
+
+     <Route
+      path="/movies/search/page/:pageNumber"
+      component={HomeScreen}
+      exact
+     />
+     <Route
+      path="/movies/:typeMovie/page/:pageNumber"
+      component={HomeScreen}
+      exact
+     />
+     <Route path="/movies/page/:pageNumber" component={HomeScreen} exact />
+     <Route path="/movies/:mid" component={MovieDetailScreen} exact />
      <Route path="/" component={HomeScreen} exact />
      <Route component={NotFoundScreen} />
     </Switch>
