@@ -144,74 +144,20 @@ const MovieDetailScreen = () => {
 
    <div className="row position-relative" style={{ top: '-100px' }}>
     <div className="col-md-8">
-     <h4 className="ubuntu mt-3 text-warning">
-      <BiCommentDetail /> Descriptions :
-     </h4>
-     <p className="text-light kh lh-base text-break">
-      <span className="ms-5"></span> Why you always in a mood? Fuckin 'round,
-      actin' brand new I ain't tryna tell you what to do, but try to play it
-      cool Baby, I ain't playing by your rules Everything look better with a
-      view Why you always in a mood? Fuckin 'round, actin' brand new I ain't
-      tryna tell you what to do, but try to play it cool Baby, I ain't playing
-      by your rules Everything look better with a view, yeahWhy you always in a
-      mood? Fuckin 'round, actin' brand new I ain't tryna tell you what to do,
-      but try to play it cool Baby, I ain't playing by your rules Everything
-      look better with a view Why you always in a mood? Fuckin 'round, actin'
-      brand new I ain't tryna tell you what to do, but try to play it cool Baby,
-      I ain't playing by your rules Everything look better with a view, yeahWhy
-      you always in a mood? Fuckin 'round, actin' brand new I ain't tryna tell
-      you what to do, but try to play it cool Baby, I ain't playing by your
-      rules Everything look better with a view Why you always in a mood? Fuckin
-      'round, actin' brand new I ain't tryna tell you what to do, but try to
-      play it cool Baby, I ain't playing by your rules Everything look better
-      with a view, yeah
-     </p>
-     <h4 className="text-warning ubuntu mt-5 kh">
-      <BiCommentDetail /> អត្ថបទ :
-     </h4>
-     <p className="text-light kh lh-base text-break">
-      <span className="ms-5"></span> ហេតុអ្វីបានជាអ្នកតែងតែមានអារម្មណ៍មិនល្អ?
-      ហ្វុកគីនជុំ, យីហោថ្មីរបស់ actin
-      ខ្ញុំមិនព្យាយាមប្រាប់អ្នកពីអ្វីដែលត្រូវធ្វើនោះទេប៉ុន្តែព្យាយាមលេងវា
-      ទារកត្រជាក់ខ្ញុំមិនត្រូវបានលេងដោយច្បាប់របស់អ្នកអ្វីគ្រប់យ៉ាងមើលទៅល្អប្រសើរជាងមុនជាមួយ
-      ហេតុអ្វីបានជាអ្នកតែងតែមានអារម្មណ៍? ហ្វុកគីន 'ជុំអាលីន' ថ្មីមិនមែនខ្ញុំទេ
-      សូណាប្រាប់អ្នកពីអ្វីដែលត្រូវធ្វើប៉ុន្តែព្យាយាមលេងវាឱ្យត្រជាក់ទារកខ្ញុំមិនលេងទេ
-      ដោយច្បាប់របស់អ្នកអ្វីគ្រប់យ៉ាងមើលទៅល្អប្រសើរជាងមុនជាមួយនឹងទស្សនៈមួយហេតុអ្វីអ្នកតែងតែនៅក្នុង
-      អារម្មណ៍? ហ្វុកគីនយីហោម៉ាកថ្មីខ្ញុំមិនត្រូវប្រាប់អ្នកពីអ្វីដែលត្រូវធ្វើទេ
-      ប៉ុន្តែព្យាយាមលេងវាឱ្យត្រជាក់ទារកខ្ញុំមិនត្រូវបានលេងដោយច្បាប់របស់អ្នកអ្វីគ្រប់យ៉ាង
-      មើលទៅប្រសើរជាងមុនជាមួយនឹងទស្សនៈហេតុអ្វីបានជាអ្នកតែងតែមានអារម្មណ៍? Fuckin
-      'round, actin'
-      ម៉ាកថ្មីខ្ញុំមិនព្យាយាមប្រាប់អ្នកពីអ្វីដែលត្រូវធ្វើទេប៉ុន្តែព្យាយាមលេងវាឱ្យត្រជាក់ទារក
-      ខ្ញុំមិនលេងតាមច្បាប់របស់អ្នកទេអ្វីៗមើលទៅល្អប្រសើរជាងមុនដោយមានទស្សនៈ
-      អ្នកតែងតែនៅក្នុងអារម្មណ៍មួយ? ហ្វុកគីន
-      'យីងស្តាលីនម៉ាកថ្មីខ្ញុំមិនមែនជាអ្នកប្រាប់ទេ
-      អ្វីដែលអ្នកត្រូវធ្វើប៉ុន្តែព្យាយាមលេងវាឱ្យត្រជាក់ទារកខ្ញុំមិនត្រូវបានលេងដោយអ្នកទេ
-      ច្បាប់អ្វីគ្រប់យ៉ាងមើលទៅល្អប្រសើរជាងមុនជាមួយនឹងទស្សនៈហេតុអ្វីបានជាអ្នកតែងតែមានអារម្មណ៍?
-      ហ្វុកគីន
-     </p>
-     <h4 className="ubuntu mt-5 text-warning">
-      <BiCommentDetail /> คำอธิบาย :
-     </h4>
-     <p className="text-light ubuntu lh-base text-break">
-      <span className="ms-5"></span> ทำไมคุณถึงมีอารมณ์อยู่เสมอ? ไอ้รอบ actin'
-      ใหม่เอี่ยม ฉันไม่ได้พยายามจะบอกคุณว่าต้องทำอย่างไร แต่พยายามจะ เล่นมัน
-      เจ๋ง ที่รัก ฉันไม่ได้เล่นตามกฎของคุณ ทุกอย่างดูดีขึ้น ด้วย a ดู
-      ทำไมคุณถึงมีอารมณ์อยู่เสมอ? เนื้อเพลงความหมาย: ไอ้ 'รอบ actin'
-      ใหม่เอี่ยมฉันไม่ได้ พยายามจะบอกคุณว่าต้องทำอย่างไร
-      แต่พยายามเล่นให้เจ๋งนะที่รัก ฉันไม่ได้เล่นนะ
-      ตามกฎของคุณทุกอย่างดูดีขึ้นด้วยมุมมองใช่ทำไมคุณถึงอยู่ใน อารมณ์?
-      เนื้อเพลงความหมาย: ไอ้ 'รอบ actin' ใหม่เอี่ยมไม่ลองบอกคุณว่าต้องทำอย่างไร
-      แต่พยายาม เล่นให้เจ๋งนะที่รัก ฉันไม่ได้เล่นตามกฎของคุณทุกอย่าง
-      ดูดีขึ้นด้วยมุมมอง ทำไมคุณถึงมีอารมณ์อยู่เสมอ? Fuckin 'รอบ actin'
-      ใหม่เอี่ยม ฉันไม่ได้พยายามที่จะบอกคุณว่าต้องทำอย่างไร
-      แต่พยายามเล่นให้เจ๋งนะที่รัก ฉันไม่ได้เล่นตามกฎของคุณ
-      ทุกอย่างดูดีขึ้นด้วยมุมมอง ใช่ทำไม คุณอยู่ในอารมณ์เสมอ? เนื้อเพลงความหมาย:
-      ไอ้ 'รอบ actin' ใหม่เอี่ยมฉันไม่พยายามบอก คุณ จะทำอย่างไร
-      แต่พยายาม เล่นให้เจ๋ง ที่รัก ฉันไม่ได้เล่นกับคุณ,
-      กฎเกณฑ์ทุกอย่างดูดีขึ้นด้วยมุมมอง ทำไมคุณถึงมีอารมณ์อยู่เสมอ? ไอ้เหี้ย
-      'รอบ actin' ใหม่เอี่ยม ฉันไม่ได้ tryna บอกคุณว่าจะทำอย่างไร แต่พยายามที่จะ
-      เล่นให้เจ๋ง ที่รัก ฉันไม่ได้เล่นตามกฎของคุณ ทุกอย่างดูดีขึ้น ด้วยมุมมองใช่
-     </p>
+     {movie &&
+      movie.descriptions.map((desc) => (
+       <div key={desc._id}>
+        <h4 className="kh mt-3 text-warning">
+         <BiCommentDetail /> {desc.desc} :
+        </h4>
+        <p className="text-light kh lh-base text-break">
+         <span className="ms-5"></span>
+         {desc.text}
+        </p>
+       </div>
+      ))}
+     <br />
+
      <h4 className="text-warning">Episodes :</h4>
      <div className="ep mt-1">
       {episodes &&

@@ -95,7 +95,19 @@ const PlayScreen = ({ match, history }) => {
       </div>
      </div>
      <div className="col-lg-3">
-      <h6 className="text-warning mt-3 mb-2">រឿងថ្មីថ្ងៃនេះ</h6>
+      <h4 className="text-warning en mt-3">On Social</h4>
+      <iframe
+       className="border-2 border border-dark"
+       src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FDrama855-107840864891869&tabs&width=340&height=130&small_header=false&adapt_container_width=false&hide_cover=false&show_facepile=false&appId"
+       width="100%"
+       height="130"
+       style={{ border: 'none', overflow: 'hidden' }}
+       scrolling="no"
+       frameBorder="0"
+       allowfullscreen="true"
+       allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+      ></iframe>
+      <h6 className="text-warning mt-3 mb-2">New Movie Today</h6>
       <MovieToday />
      </div>
     </div>

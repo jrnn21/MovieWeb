@@ -6,15 +6,19 @@ import { ImTwitter } from 'react-icons/im';
 
 const Footer = () => {
  return (
-  <div className="w-100">
+  <div
+   className="w-100"
+   style={{ background: 'rgb(62, 69, 75)', paddingBottom: '30px' }}
+  >
    <div className="mt-5 container">
     <div
-     style={{ padding: '50px 0 40px 0' }}
+     style={{ padding: '40px 0 30px 0' }}
      className="d-flex justify-content-center"
     >
      <a
       target="_blank"
       href="https://www.facebook.com/Drama855-107840864891869"
+      rel="noreferrer"
      >
       <FaFacebookSquare
        className="instagram p-1"
@@ -28,6 +32,7 @@ const Footer = () => {
       target="_blank"
       style={{ margin: '0 100px' }}
       href="https://www.instagram.com/"
+      rel="noreferrer"
      >
       <FaInstagram
        className="instagram p-1"
@@ -45,6 +50,7 @@ const Footer = () => {
       target="_blank"
       style={{ marginRight: '100px' }}
       href="https://twitter.com"
+      rel="noreferrer"
      >
       <ImTwitter
        className="instagram p-1"
@@ -61,6 +67,7 @@ const Footer = () => {
      <a
       target="_blank"
       href="https://www.youtube.com/channel/UCMiWt-Nr1OjxPydeQDhHHIg"
+      rel="noreferrer"
      >
       <FaYoutube
        className="instagram p-1"

@@ -26,6 +26,7 @@ const movieSchema = mongoose.Schema(
   movieType: { type: String, required: true },
   img: { type: String },
   slideImg: { type: String },
+  toggleSlide: { type: Boolean },
   tag: { type: String },
   movieName: { type: String, required: true },
   descriptions: [descrip],

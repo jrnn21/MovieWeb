@@ -97,12 +97,21 @@ const HomeScreen = ({ match, history }) => {
       <About />
      </div>
      <div className="col-lg-3">
-      <div className="rounded border-info mt-5">
-       <h6
-        className="khFont text-light bg-warning rounded-top mb-0 px-3"
-        style={{ padding: 10 }}
-       >
-        ថេក
+      <h4 className="text-warning en mt-3">On Social</h4>
+      <iframe
+       className="border-2 border border-dark"
+       src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FDrama855-107840864891869&tabs&width=340&height=130&small_header=false&adapt_container_width=false&hide_cover=false&show_facepile=false&appId"
+       width="100%"
+       height="130"
+       style={{ border: 'none', overflow: 'hidden' }}
+       scrolling="no"
+       frameBorder="0"
+       allowfullscreen="true"
+       allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+      ></iframe>
+      <div className="rounded border-info mt-2">
+       <h6 className="bg-warning rounded-top mb-0 px-3" style={{ padding: 10 }}>
+        Tag
        </h6>
        <div className="bg-dark mt-0 rounded-bottom ps-1">
         <NavLink
@@ -205,7 +214,7 @@ const HomeScreen = ({ match, history }) => {
         </NavLink>
        </div>
       </div>
-      <h6 className="text-warning mt-3 mb-0">រឿងថ្មីថ្ងៃនេះ</h6>
+      <h5 className="text-warning mt-3 en mb-2">New Movies Today</h5>
       <MovieToday />
      </div>
     </div>

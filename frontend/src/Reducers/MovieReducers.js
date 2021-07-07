@@ -1,4 +1,20 @@
 import {
+ DESC_CREATE_FAIL,
+ DESC_CREATE_REQUEST,
+ DESC_CREATE_RESET,
+ DESC_CREATE_SUCCESS,
+ DESC_DELETE_FAIL,
+ DESC_DELETE_REQUEST,
+ DESC_DELETE_RESET,
+ DESC_DELETE_SUCCESS,
+ DESC_LIST_FAIL,
+ DESC_LIST_REQUEST,
+ DESC_LIST_RESET,
+ DESC_LIST_SUCCESS,
+ DESC_UPDATE_FAIL,
+ DESC_UPDATE_REQUEST,
+ DESC_UPDATE_RESET,
+ DESC_UPDATE_SUCCESS,
  EP_CREATE_FAIL,
  EP_CREATE_REQUEST,
  EP_CREATE_RESET,
@@ -95,6 +111,21 @@ export const epByMovieReducer = (state = {}, action) => {
  }
 };
 
+export const descByMovieReducer = (state = {}, action) => {
+ switch (action.type) {
+  case DESC_LIST_REQUEST:
+   return { loading: true };
+  case DESC_LIST_SUCCESS:
+   return { loading: false, descrip: action.payload, success: true };
+  case DESC_LIST_FAIL:
+   return { loading: false, error: action.payload };
+  case DESC_LIST_RESET:
+   return {};
+  default:
+   return state;
+ }
+};
+
 export const createEpByMovieReducer = (state = {}, action) => {
  switch (action.type) {
   case EP_CREATE_REQUEST:
@@ -109,6 +140,22 @@ export const createEpByMovieReducer = (state = {}, action) => {
    return state;
  }
 };
+
+export const createDescByMovieReducer = (state = {}, action) => {
+ switch (action.type) {
+  case DESC_CREATE_REQUEST:
+   return { loading: true };
+  case DESC_CREATE_SUCCESS:
+   return { loading: false, descrip: action.payload, success: true };
+  case DESC_CREATE_FAIL:
+   return { loading: false, error: action.payload };
+  case DESC_CREATE_RESET:
+   return {};
+  default:
+   return state;
+ }
+};
+
 export const updateEpByMovieReducer = (state = {}, action) => {
  switch (action.type) {
   case EP_UPDATE_REQUEST:
@@ -124,6 +171,21 @@ export const updateEpByMovieReducer = (state = {}, action) => {
  }
 };
 
+export const updateDescByMovieReducer = (state = {}, action) => {
+ switch (action.type) {
+  case DESC_UPDATE_REQUEST:
+   return { loading: true };
+  case DESC_UPDATE_SUCCESS:
+   return { loading: false, descrip: action.payload, success: true };
+  case DESC_UPDATE_FAIL:
+   return { loading: false, error: action.payload };
+  case DESC_UPDATE_RESET:
+   return {};
+  default:
+   return state;
+ }
+};
+
 export const deleteEpByMovieReducer = (state = {}, action) => {
  switch (action.type) {
   case EP_DELETE_REQUEST:
@@ -133,6 +195,21 @@ export const deleteEpByMovieReducer = (state = {}, action) => {
   case EP_DELETE_FAIL:
    return { loading: false, error: action.payload };
   case EP_DELETE_RESET:
+   return {};
+  default:
+   return state;
+ }
+};
+
+export const deleteDescByMovieReducer = (state = {}, action) => {
+ switch (action.type) {
+  case DESC_DELETE_REQUEST:
+   return { loading: true };
+  case DESC_DELETE_SUCCESS:
+   return { loading: false, descrip: action.payload, success: true };
+  case DESC_DELETE_FAIL:
+   return { loading: false, error: action.payload };
+  case DESC_DELETE_RESET:
    return {};
   default:
    return state;

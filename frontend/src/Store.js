@@ -4,12 +4,16 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import { userLoginReducer } from './Reducers/UserReducers';
 import { typeListReducers } from './Reducers/TypeListReducers';
 import {
+ createDescByMovieReducer,
  createEpByMovieReducer,
  createMovieReducer,
+ deleteDescByMovieReducer,
  deleteEpByMovieReducer,
+ descByMovieReducer,
  epByMovieReducer,
  movieDetailReducer,
  movieListReducer,
+ updateDescByMovieReducer,
  updateEpByMovieReducer,
 } from './Reducers/MovieReducers';
 
@@ -23,6 +27,10 @@ const reducer = combineReducers({
  createEpByMovie: createEpByMovieReducer,
  updateEpByMovie: updateEpByMovieReducer,
  deleteEpByMovie: deleteEpByMovieReducer,
+ descByMovie: descByMovieReducer,
+ createDescByMovie: createDescByMovieReducer,
+ updateDescByMovie: updateDescByMovieReducer,
+ deleteDescByMovie: deleteDescByMovieReducer,
 });
 
 const userInfoFromStorage = localStorage.getItem('userIn')

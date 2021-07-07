@@ -8,13 +8,24 @@ import moment from 'moment';
 // @access  Public
 const getSlide = asyncHandler(async (req, res) => {
  const movies = await Movie.find({
-  slideImg: {
-   $ne: '/uploads/videoUploads/default-slide.jpg',
-  },
+  toggleSlide: true,
  }).sort({ updatedAt: -1 });
 
  if (movies) {
   res.json(movies);
+ } else {
+  res.status(404);
+  throw new Error('Movies not Found');
+ }
+});
+
+const toggleSlide = asyncHandler(async (req, res) => {
+ const { toggle } = req.body;
+ const movie = await Movie.findById(req.params.mid);
+ if (movie) {
+  movie.toggleSlide = toggle;
+  const slideToggle = await movie.save();
+  res.json({ toggle: slideToggle.toggleSlide });
  } else {
   res.status(404);
   throw new Error('Movies not Found');
@@ -45,7 +56,7 @@ const getMoviesUpdateToday = asyncHandler(async (req, res) => {
 //@route   GET /api/search/movies
 //@access  Public
 const getMovies = asyncHandler(async (req, res) => {
- const pageSize = 12;
+ const pageSize = 18;
  const page = Number(req.query.pageNumber) || 1;
 
  const keyword = req.query.keyword
@@ -239,10 +250,10 @@ const createEpByMovie = asyncHandler(async (req, res) => {
 //@access  Private admin
 const createDescByMovie = asyncHandler(async (req, res) => {
  const mid = req.params.mid;
- const { descCreate } = req.body;
+ const { desc } = req.body;
  const movie = await Movie.findById(mid);
  if (movie) {
-  movie.descriptions.push({ desc: descCreate.desc, text: descCreate.text });
+  movie.descriptions.push({ desc: desc.desc, text: desc.text });
   const descMovie = await movie.save();
   res.json(descMovie);
  } else {
@@ -280,16 +291,16 @@ const updateEpByMovie = asyncHandler(async (req, res) => {
 //@access  Private admin
 const updateDescByMovie = asyncHandler(async (req, res) => {
  const mid = req.params.mid;
- const desc = req.params.desc;
- const { descUpdate } = req.body;
+ const des = req.params.desc;
+ const { desc } = req.body;
  const movie = await Movie.findById(mid);
  if (movie) {
   const descrip = movie.descriptions.find((obj) => {
-   return obj.id === desc;
+   return obj.id === des;
   });
   if (descrip) {
-   descrip.desc = descUpdate.desc;
-   descrip.text = descUpdate.text;
+   descrip.desc = desc.desc;
+   descrip.text = desc.text;
    const descMovie = await movie.save();
    res.json(descMovie);
   }
@@ -382,4 +393,5 @@ export {
  createDescByMovie,
  updateDescByMovie,
  deleteDescByMovie,
+ toggleSlide,
 };

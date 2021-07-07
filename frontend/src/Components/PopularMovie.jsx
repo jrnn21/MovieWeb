@@ -8,7 +8,7 @@ import { useHistory } from 'react-router';
 const PopularMovie = () => {
  const [slides, setSlides] = useState([]);
  const history = useHistory();
- useEffect((state) => {
+ useEffect(() => {
   async function fetchData() {
    const { data } = await axios.get('/api/movies/slide/img');
    if (data) {
@@ -85,7 +85,11 @@ const PopularMovie = () => {
        className="w-100 position-relative videoCard"
        onClick={() => gotoDetail(m)}
       >
-       <img className="w-100" src={m.slideImg} alt="" />
+       <img
+        className="w-100"
+        src={m.slideImg || '/uploads/videoUploads/default-slide.jpg'}
+        alt=""
+       />
        <div
         className="position-absolute w-100 py-3 px-4 carasal"
         style={{ bottom: 0, height: 50 }}

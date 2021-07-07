@@ -21,6 +21,17 @@ import {
  EP_DELETE_REQUEST,
  EP_DELETE_SUCCESS,
  EP_DELETE_FAIL,
+ DESC_LIST_SUCCESS,
+ DESC_LIST_FAIL,
+ DESC_CREATE_REQUEST,
+ DESC_CREATE_SUCCESS,
+ DESC_CREATE_FAIL,
+ DESC_UPDATE_REQUEST,
+ DESC_UPDATE_SUCCESS,
+ DESC_UPDATE_FAIL,
+ DESC_DELETE_REQUEST,
+ DESC_DELETE_SUCCESS,
+ DESC_DELETE_FAIL,
 } from '../Constants/MovieConstants';
 
 export const getMovies = (pageNumber, keyword) => async (dispatch) => {
@@ -98,6 +109,21 @@ export const getEpByMovie = (mid, sssss) => async (dispatch) => {
  }
 };
 
+export const getDescByMovie = (mid) => async (dispatch) => {
+ try {
+  const { data } = await axios.get(`/api/movies/${mid}/descrip`);
+  dispatch({ type: DESC_LIST_SUCCESS, payload: data });
+ } catch (error) {
+  dispatch({
+   type: DESC_LIST_FAIL,
+   payload:
+    error.response && error.response.data.message
+     ? error.response.data.message
+     : error.message,
+  });
+ }
+};
+
 export const createEpByMovieId =
  (mid, epCreate) => async (dispatch, getState) => {
   try {
@@ -119,6 +145,35 @@ export const createEpByMovieId =
   } catch (error) {
    dispatch({
     type: EP_CREATE_FAIL,
+    payload:
+     error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message,
+   });
+  }
+ };
+
+export const createDescByMovieId =
+ (mid, desc) => async (dispatch, getState) => {
+  try {
+   dispatch({ type: DESC_CREATE_REQUEST });
+   const {
+    userLogin: { userIn },
+   } = getState();
+   const config = {
+    headers: {
+     Authorization: `Bearer ${userIn.token}`,
+    },
+   };
+   const { data } = await axios.post(
+    `/api/movies/${mid}/descrip`,
+    { desc },
+    config
+   );
+   dispatch({ type: DESC_CREATE_SUCCESS, payload: data });
+  } catch (error) {
+   dispatch({
+    type: DESC_CREATE_FAIL,
     payload:
      error.response && error.response.data.message
       ? error.response.data.message
@@ -156,6 +211,35 @@ export const updateEpByMovieId =
   }
  };
 
+export const updateDescByMovieId =
+ (mid, desc) => async (dispatch, getState) => {
+  try {
+   dispatch({ type: DESC_UPDATE_REQUEST });
+   const {
+    userLogin: { userIn },
+   } = getState();
+   const config = {
+    headers: {
+     Authorization: `Bearer ${userIn.token}`,
+    },
+   };
+   const { data } = await axios.put(
+    `/api/movies/${mid}/descrip/${desc.did}`,
+    { desc },
+    config
+   );
+   dispatch({ type: DESC_UPDATE_SUCCESS, payload: data });
+  } catch (error) {
+   dispatch({
+    type: DESC_UPDATE_FAIL,
+    payload:
+     error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message,
+   });
+  }
+ };
+
 export const deleteEpByMovieId =
  (mid, epUpdate) => async (dispatch, getState) => {
   try {
@@ -176,6 +260,34 @@ export const deleteEpByMovieId =
   } catch (error) {
    dispatch({
     type: EP_DELETE_FAIL,
+    payload:
+     error.response && error.response.data.message
+      ? error.response.data.message
+      : error.message,
+   });
+  }
+ };
+
+export const deleteDescByMovieId =
+ (mid, desc) => async (dispatch, getState) => {
+  try {
+   dispatch({ type: DESC_DELETE_REQUEST });
+   const {
+    userLogin: { userIn },
+   } = getState();
+   const config = {
+    headers: {
+     Authorization: `Bearer ${userIn.token}`,
+    },
+   };
+   const { data } = await axios.delete(
+    `/api/movies/${mid}/descrip/${desc}`,
+    config
+   );
+   dispatch({ type: DESC_DELETE_SUCCESS, payload: data });
+  } catch (error) {
+   dispatch({
+    type: DESC_DELETE_FAIL,
     payload:
      error.response && error.response.data.message
       ? error.response.data.message

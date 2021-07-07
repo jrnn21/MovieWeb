@@ -15,6 +15,7 @@ import {
 } from '../Constants/MovieConstants';
 import LoaderButton from '../Components/LoaderButton';
 import AdminSite from '../Components/AdminSite';
+import Descriptions from '../Components/Descriptions';
 
 const VideoPageEdit = ({ match, history }) => {
  const movieId = match.params.mid;
@@ -27,6 +28,7 @@ const VideoPageEdit = ({ match, history }) => {
   img: '',
   tag: '',
   slideImg: '',
+  toggleSlide: false,
  });
  const [deletedMovie, setDeletedMovie] = useState(false);
  const [updateMovie, setUpdateMovie] = useState(false);
@@ -38,6 +40,7 @@ const VideoPageEdit = ({ match, history }) => {
  const { userIn } = userLogin;
  const movieDetail = useSelector((state) => state.movieDetail);
  const { movie } = movieDetail;
+ console.log(movie);
  const epByMovie = useSelector((state) => state.epByMovie);
  const { episodes } = epByMovie;
  const createEpByMovie = useSelector((state) => state.createEpByMovie);
@@ -60,6 +63,7 @@ const VideoPageEdit = ({ match, history }) => {
     img: movie.img,
     tag: movie.tag,
     slideImg: movie.slideImg || '',
+    toggleSlide: movie.toggleSlide || false,
    });
   }
  }, [dispatch, movieId, movie]);
@@ -250,7 +254,7 @@ const VideoPageEdit = ({ match, history }) => {
   resetVideo();
  };
 
- const slideImgDelete = (e) => {
+ const slideToggle = async () => {
   // e.preventDefault();
   const config = {
    headers: {
@@ -258,25 +262,17 @@ const VideoPageEdit = ({ match, history }) => {
     Authorization: `Bearer ${userIn.token}`,
    },
   };
-  async function deleteSilde() {
-   const { data } = await axios.put(
-    `/api/img/${movieId}/slide`,
-    { slideImg: '/uploads/videoUploads/default-slide.jpg' },
-    config
-   );
-   console.log(data);
-   if (data) {
-    await axios.post('/api/uploads/img/delete/slide', {
-     slideImg: movieEdit.slideImg,
-    });
-    setMovieEdit({
-     ...movieEdit,
-     slideImg: '',
-    });
-   }
-  }
 
-  deleteSilde();
+  const { data } = await axios.put(
+   `/api/movies/slide/toggle/${movieId}`,
+   {
+    toggle: !movieEdit.toggleSlide,
+   },
+   config
+  );
+  if (data) {
+   setMovieEdit({ ...movieEdit, toggleSlide: data.toggle });
+  }
  };
 
  if (userIn && userIn.isAdmin) {
@@ -385,18 +381,15 @@ const VideoPageEdit = ({ match, history }) => {
               id="formFile"
               onChange={uploadSlideHandler}
              />
-             {movieEdit.slideImg === '' ||
-             movieEdit.slideImg ===
-              '/uploads/videoUploads/default-slide.jpg' ? null : (
-              <button
-               type="button"
-               onClick={slideImgDelete}
-               className="btn btn-danger khFont ms-2"
-               style={{ width: 80 }}
-              >
-               មិនដាក់
-              </button>
-             )}
+
+             <button
+              type="button"
+              onClick={slideToggle}
+              className="btn btn-danger khFont ms-2"
+              style={{ width: 80 }}
+             >
+              {movieEdit.toggleSlide ? 'មិនដាក់' : 'ដាក់'}
+             </button>
             </div>
            </div>
           </div>
@@ -516,6 +509,9 @@ const VideoPageEdit = ({ match, history }) => {
           </div>
          </div>
         </div>
+       </div>
+       <div>
+        <Descriptions mid={movieId} />
        </div>
        <div className="mt-3">
         <div className="d-flex justify-content-center">

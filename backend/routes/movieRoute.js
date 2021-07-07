@@ -17,6 +17,7 @@ import {
  createDescByMovie,
  updateDescByMovie,
  deleteDescByMovie,
+ toggleSlide,
 } from '../controller/movieController.js';
 
 const router = express.Router();
@@ -51,5 +52,6 @@ router
 
 router.route('/update/today').get(getMoviesUpdateToday);
 router.route('/slide/img').get(getSlide);
+router.route('/slide/toggle/:mid').put(protect, admin, toggleSlide);
 
 export default router;

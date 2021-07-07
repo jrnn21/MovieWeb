@@ -4,6 +4,7 @@ import axios from 'axios';
 import { MOVIE_DETAIL_SUCCESS } from '../Constants/MovieConstants';
 import { useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import imgDefault from '../Image/default-image.jpg';
 
 const VideoCard = ({ admin = false, movie }) => {
  const dispatch = useDispatch();
@@ -26,11 +27,7 @@ const VideoCard = ({ admin = false, movie }) => {
     style={{ width: '18rem' }}
     onClick={admin ? movieDetail : movieDetailScreen}
    >
-    <img
-     className="w-100 h-100"
-     src="/uploads/videoUploads/default-image.jpg"
-     alt=""
-    />
+    <img className="w-100 h-100" src={imgDefault} alt="" />
     <img
      style={{ top: 0, left: 0 }}
      src={movie.img}
