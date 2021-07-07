@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useHistory } from 'react-router';
+import { MOVIE_DETAIL_SUCCESS } from '../Constants/MovieConstants';
+import { useDispatch } from 'react-redux';
 
 const MovieToday = () => {
  const [movies, setMovies] = useState([]);
  const history = useHistory();
+ const dispatch = useDispatch();
 
  useEffect(() => {
   async function fetchData() {
@@ -15,19 +18,20 @@ const MovieToday = () => {
   fetchData();
  }, []);
 
- const movieDetailScreen = (movie) => {
-  if (movie && movie.episodes.length !== 0) {
-   history.push(`/movies/${movie._id}/episodes/${movie.episodes[0]._id}`);
+ const movieDetailScreen = async (movie) => {
+  const { data } = await axios.get(`/api/movies/${movie._id}`);
+  if (data) {
+   dispatch({ type: MOVIE_DETAIL_SUCCESS, payload: data });
+   history.push(`/movies/${movie._id}`);
   }
  };
  return (
-  <div className="d-flex flex-wrap flex-md-nowrap flex-lg-wrap justify-content-between">
+  <div className="d-flex flex-wrap">
    {movies &&
     movies.map((m) => (
      <div
       className="p-1 bg-dark mb-1 d-flex todayItem"
       key={m._id}
-      style={{ maxWidth: '550px', minWidth: '200px' }}
       onClick={() => movieDetailScreen(m)}
      >
       <div className="w-25 overflow-hidden position-relative">

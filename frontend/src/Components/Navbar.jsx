@@ -13,7 +13,7 @@ const Navbar = () => {
  const dispatch = useDispatch();
  const query = queryString.parse(location.search);
  const keyword = query.keyword || '';
- const [word, setWord] = useState(query.keyword || '');
+ const [word, setWord] = useState(keyword);
 
  const userLogin = useSelector((state) => state.userLogin);
  const { userIn } = userLogin;
@@ -51,14 +51,14 @@ const Navbar = () => {
     >
      <div className="container-lg">
       <Link to={'/'} className="navbar-brand text-warning">
-       Drama855
+       DRAMA855
       </Link>
       <div className="col-6 col-md-4 d-lg-none">
        <form className="d-flex w-100" onSubmit={searchSubmit}>
         <input
          className="form-control me-2 khFont w-100 text-center bg-dark text-warning"
          type="search"
-         placeholder="ឈ្មោះរឿង/Tag"
+         placeholder="Movie name..."
          aria-label="Search"
          onChange={searchOnChange}
          value={word}
@@ -127,30 +127,6 @@ const Navbar = () => {
           CHAINESE
          </NavLink>
         </li>
-        <li className="nav-item dropdown">
-         <a
-          className="nav-link dropdown-toggle khFont text-warning"
-          href="#"
-          id="navbarDropdown"
-          role="button"
-          data-bs-toggle="dropdown"
-          aria-expanded="false"
-         >
-          ប្រភេទរឿង
-         </a>
-         <ul className="dropdown-menu" aria-labelledby="navbarDropdown">
-          <li>
-           <a className="dropdown-item" href="#">
-            រឿងថៃ
-           </a>
-          </li>
-          <li>
-           <a className="dropdown-item" href="#">
-            រឿងចិន
-           </a>
-          </li>
-         </ul>
-        </li>
        </ul>
 
        <div className="col-6 col-md-4 d-none d-lg-block">
@@ -162,12 +138,14 @@ const Navbar = () => {
           className="form-control me-2 khFont text-center bg-dark text-warning"
           style={{ width: '65%' }}
           type="search"
-          placeholder="ឈ្មោះរឿង/Tag"
+          placeholder="Movie name..."
           aria-label="Search"
           onChange={searchOnChange}
           value={word}
          />
-
+         <button type="submit" hidden>
+          submit
+         </button>
          {movieListLoading ? (
           <button className="btn btn-warning khFont" type="submit">
            <Loader />

@@ -27,7 +27,7 @@ const PopularMovie = () => {
  return (
   <>
    <div
-    className="position-relative p-1 mb-1"
+    className="position-relative p-1 mb-1 w-100"
     style={{ background: 'rgba(0, 0, 0, 0.8)' }}
    >
     <Carousel

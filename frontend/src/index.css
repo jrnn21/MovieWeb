@@ -1,25 +1,60 @@
-@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+SC:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kantumruy:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Encode+Sans+SC:wght@300&display=swap');
 * {
- font-family: 'Encode Sans SC', sans-serif;
+ /* font-family: 'Encode Sans SC', sans-serif; */
+ font-family: 'Ubuntu', sans-serif;
 }
 
 body {
- font-family: 'Encode Sans SC', sans-serif;
+ /* font-family: 'Encode Sans SC', sans-serif; */
+ font-family: 'Ubuntu', sans-serif;
  background: rgb(44, 49, 54) !important;
  overflow-y: scroll;
 }
 
+.instagram {
+ display: inline-block;
+ text-align: center;
+ border-radius: 5px;
+ /* color: #fff; */
+ font-size: 220px;
+ line-height: 250px;
+ vertical-align: middle;
+ cursor: pointer;
+ box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
+}
+
+.instagram:hover {
+ background: rgb(255, 255, 255) !important;
+}
+
+.ubuntu {
+ font-family: 'Ubuntu', sans-serif;
+}
+
+.en {
+ font-family: 'Encode Sans SC', sans-serif;
+}
+
 .testColor {
- color: #cbe8ff;
+ color: rgba(0, 0, 0, 0.404);
+}
+
+.playIcon:hover {
+ color: rgba(194, 194, 194, 0.767) !important;
 }
 
 .nameMovie:hover {
  color: rgb(255, 203, 33) !important;
 }
 
+.kh {
+ font-family: 'Kantumruy', sans-serif;
+}
+
 .khFont {
- font-family: myriad-pro, Lucida Grande, Arial, 'Kantumruy', 'Siemreap',
-  sans-serif;
+ font-family: 'Kantumruy', sans-serif;
 }
 
 .carasal {

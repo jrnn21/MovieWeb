@@ -13,6 +13,10 @@ import {
  getEpById,
  getMoviesUpdateToday,
  getSlide,
+ getDescByMovie,
+ createDescByMovie,
+ updateDescByMovie,
+ deleteDescByMovie,
 } from '../controller/movieController.js';
 
 const router = express.Router();
@@ -34,6 +38,16 @@ router
  .get(getEpById)
  .put(protect, admin, updateEpByMovie)
  .delete(protect, admin, deleteEpByMovie);
+
+router
+ .route('/:mid/descrip')
+ .get(getDescByMovie)
+ .post(protect, admin, createDescByMovie);
+
+router
+ .route('/:mid/descrip/:desc')
+ .put(protect, admin, updateDescByMovie)
+ .delete(protect, admin, deleteDescByMovie);
 
 router.route('/update/today').get(getMoviesUpdateToday);
 router.route('/slide/img').get(getSlide);

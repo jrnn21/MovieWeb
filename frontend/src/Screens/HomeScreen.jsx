@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import VideoCard from '../Components/VideoCard';
 import PopularMovie from '../Components/PopularMovie';
-import TypeBar from '../Components/TypeBar';
 import { useDispatch, useSelector } from 'react-redux';
 import { MOVIE_LIST_RESET } from '../Constants/MovieConstants';
 import { getMovies } from '../Actions/MovieActions';
@@ -13,6 +12,8 @@ import Message from '../Components/Message';
 import MovieToday from '../Components/MovieToday';
 import { Helmet } from 'react-helmet';
 import NoVideo from '../Components/NoVideo';
+import { RiMovieLine } from 'react-icons/ri';
+import About from '../Components/About';
 
 const HomeScreen = ({ match, history }) => {
  const pageNumber = match.params.pageNumber || 1;
@@ -34,8 +35,9 @@ const HomeScreen = ({ match, history }) => {
  useEffect(() => {
   dispatch({ type: MOVIE_LIST_RESET });
   dispatch(getMovies(pageNumber, keyword));
-  console.log(keyword);
  }, [dispatch, pageNumber, keyword, word]);
+
+ console.log(movieList);
 
  return (
   <>
@@ -53,14 +55,14 @@ const HomeScreen = ({ match, history }) => {
     <div className="container"></div>
    </div>
    <div className="container position-relative" style={{ minHeight: '100vh' }}>
+    <PopularMovie />
     <div className="row">
      <div className="col-lg-9 mx-0 px-0">
-      <PopularMovie />
       <div style={{ marginTop: 10 }}></div>
-      <TypeBar
-       typeBar={keyword ? `ស្វែងរក​​ -​ ${keyword}` : 'រឿង'}
-       barColor={'warning'}
-      />
+      <h4 className="text-warning">
+       <RiMovieLine style={{ marginTop: '-5px' }} />{' '}
+       {keyword ? 'SEARCH - ' + keyword : 'MOVIES '}
+      </h4>
       {movieListLoading ? (
        <div className="mt-2" style={{ height: '30vh' }}>
         <Loader />
@@ -71,7 +73,7 @@ const HomeScreen = ({ match, history }) => {
        <>
         {movies && movies.length !== 0 ? (
          <>
-          <div className="row row-cols-xxl-6 row-cols-xl-5 row-cols-lg-4 row-cols-md-4 row-cols-sm-3 row-cols-3 p-2">
+          <div className="m-0 p-0 row row-cols-xxl-6 row-cols-xl-5 row-cols-lg-4 row-cols-md-4 row-cols-sm-3 row-cols-3">
            {movies &&
             movies.map((movie) => (
              <div className="col m-0 p-1" key={movie._id}>
@@ -92,16 +94,17 @@ const HomeScreen = ({ match, history }) => {
         )}
        </>
       )}
+      <About />
      </div>
      <div className="col-lg-3">
-      <div className="rounded border-info">
+      <div className="rounded border-info mt-5">
        <h6
         className="khFont text-light bg-warning rounded-top mb-0 px-3"
         style={{ padding: 10 }}
        >
         ថេក
        </h6>
-       <div className="bg-dark mt-0 rounded-bottom">
+       <div className="bg-dark mt-0 rounded-bottom ps-1">
         <NavLink
          to="/home?keyword=រឿងភាគថៃ"
          activeClassName="bg-info"

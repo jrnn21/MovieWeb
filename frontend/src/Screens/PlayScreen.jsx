@@ -5,11 +5,8 @@ import { getEpByMovie, getMovieById } from '../Actions/MovieActions';
 import TypeBar from '../Components/TypeBar';
 import axios from 'axios';
 import Loader from '../Components/Loader';
-import {
- EP_CREATE_RESET,
- MOVIE_DETAIL_RESET,
-} from '../Constants/MovieConstants';
 import MovieToday from '../Components/MovieToday';
+import { EP_LIST_RESET } from '../Constants/MovieConstants';
 
 const PlayScreen = ({ match, history }) => {
  const { mid, ep } = match.params;
@@ -23,14 +20,11 @@ const PlayScreen = ({ match, history }) => {
  const { episodes } = epByMovie;
 
  useEffect(() => {
-  dispatch({ type: MOVIE_DETAIL_RESET });
   dispatch(getMovieById(mid));
  }, [dispatch, mid]);
 
  useEffect(() => {
   window.scroll(0, 0);
-  // dispatch({ type: EP_LIST_RESET });
-  dispatch({ type: EP_CREATE_RESET });
   dispatch(getEpByMovie(mid, 'asc'));
 
   async function fetchData() {
@@ -41,6 +35,10 @@ const PlayScreen = ({ match, history }) => {
   }
   fetchData();
  }, [dispatch, mid, ep]);
+
+ useEffect(() => {
+  dispatch({ type: EP_LIST_RESET });
+ }, [dispatch]);
  return (
   <>
    <div className="container mt-2" style={{ minHeight: '100vh' }}>
@@ -86,7 +84,8 @@ const PlayScreen = ({ match, history }) => {
           <NavLink
            key={epi._id}
            to={`/movies/${mid}/episodes/${epi._id}`}
-           className="py-2 px-3 nav-link border video btn d-inline-block m-1 cateItem t_light"
+           className="py-2 px-4 nav-link video btn d-inline-block m-1 cateItem t_light"
+           style={{ background: '#2c3e50' }}
            activeClassName="bg-light t_warning"
           >
            {epi.episode}

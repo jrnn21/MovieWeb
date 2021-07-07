@@ -40,7 +40,7 @@ const VideoCard = ({ admin = false, movie }) => {
     <div className="card-body position-absolute bottom-0 text-light text-center w-100 cardHover">
      <div className="d-flex justify-content-end">
       <small className="khFont text-right d-inline-block text-warning">
-       ep {movie.episodes.length}
+       ep {movie.ep}
       </small>
      </div>
     </div>

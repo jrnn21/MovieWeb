@@ -10,6 +10,16 @@ const episode = mongoose.Schema(
  }
 );
 
+const descrip = mongoose.Schema(
+ {
+  desc: String,
+  text: String,
+ },
+ {
+  timestamps: true,
+ }
+);
+
 const movieSchema = mongoose.Schema(
  {
   user: { type: mongoose.Schema.Types.ObjectId, required: true, ref: 'User' },
@@ -18,6 +28,7 @@ const movieSchema = mongoose.Schema(
   slideImg: { type: String },
   tag: { type: String },
   movieName: { type: String, required: true },
+  descriptions: [descrip],
   updateMovie: { type: String, required: true },
   episodes: [episode],
  },

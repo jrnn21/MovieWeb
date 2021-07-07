@@ -30,7 +30,7 @@ const getMoviesUpdateToday = asyncHandler(async (req, res) => {
  const movies = await Movie.find({
   updatedAt: { $gte: start, $lt: end },
  })
-  .limit(3)
+  .limit(5)
   .sort({ updatedAt: 1 });
 
  if (movies) {
@@ -61,7 +61,15 @@ const getMovies = asyncHandler(async (req, res) => {
   .sort({ updatedAt: -1 })
   .limit(pageSize)
   .skip(pageSize * (page - 1));
- res.json({ movies, page, pages: Math.ceil(count / pageSize), count });
+
+ const mo = movies.map((m) => ({
+  _id: m._id,
+  movieName: m.movieName,
+  ep: m.episodes.length,
+  updateMovie: m.updateMovie,
+  img: m.img,
+ }));
+ res.json({ movies: mo, page, pages: Math.ceil(count / pageSize), count });
 });
 
 //@desc    Fetch movie detail
@@ -91,6 +99,7 @@ const createMovie = asyncHandler(async (req, res) => {
   movieName: 'ដាក់ឈ្មោះ',
   updateMovie: 'ថ្មី',
   episodes: [],
+  descriptions: [],
  });
  const newMovie = await movie.save();
  res.status(201).json(newMovie);
@@ -191,6 +200,23 @@ const getEpByMovie = asyncHandler(async (req, res) => {
  }
 });
 
+//@desc    Fetch video movie
+//@route   GET /api/movies/:mid/descrip
+//@access  Public
+const getDescByMovie = asyncHandler(async (req, res) => {
+ const mid = req.params.mid;
+
+ const movie = await Movie.findById(mid);
+ if (movie) {
+  const descByMovie = movie.descriptions;
+
+  res.json(descByMovie);
+ } else {
+  res.status(404);
+  throw new Error(`Movie not Found! Can't get Ep`);
+ }
+});
+
 //@desc    Create video movie
 //@route   POST /api/movies/:mid/episodes
 //@access  Private admin
@@ -202,6 +228,23 @@ const createEpByMovie = asyncHandler(async (req, res) => {
   movie.episodes.push({ episode: epCreate.name, videoUrl: epCreate.url });
   const epMovie = await movie.save();
   res.json(epMovie);
+ } else {
+  res.status(404);
+  throw new Error(`Movie not Found! Can't create ep`);
+ }
+});
+
+//@desc    Create video movie
+//@route   POST /api/movies/:mid/descrip
+//@access  Private admin
+const createDescByMovie = asyncHandler(async (req, res) => {
+ const mid = req.params.mid;
+ const { descCreate } = req.body;
+ const movie = await Movie.findById(mid);
+ if (movie) {
+  movie.descriptions.push({ desc: descCreate.desc, text: descCreate.text });
+  const descMovie = await movie.save();
+  res.json(descMovie);
  } else {
   res.status(404);
   throw new Error(`Movie not Found! Can't create ep`);
@@ -232,6 +275,30 @@ const updateEpByMovie = asyncHandler(async (req, res) => {
  }
 });
 
+//@desc    Update video movie
+//@route   PUT /api/movies/:mid/desc/:desc
+//@access  Private admin
+const updateDescByMovie = asyncHandler(async (req, res) => {
+ const mid = req.params.mid;
+ const desc = req.params.desc;
+ const { descUpdate } = req.body;
+ const movie = await Movie.findById(mid);
+ if (movie) {
+  const descrip = movie.descriptions.find((obj) => {
+   return obj.id === desc;
+  });
+  if (descrip) {
+   descrip.desc = descUpdate.desc;
+   descrip.text = descUpdate.text;
+   const descMovie = await movie.save();
+   res.json(descMovie);
+  }
+ } else {
+  res.status(404);
+  throw new Error(`Movie not Found! Can't update ep`);
+ }
+});
+
 //@desc    Delete video movie
 //@route   DELETE /api/movies/:mid/episodes/:ep
 //@access  Private admin
@@ -247,6 +314,28 @@ const deleteEpByMovie = asyncHandler(async (req, res) => {
    movie.episodes = episode;
    await movie.save();
    res.json(movie.episodes);
+  }
+ } else {
+  res.status(404);
+  throw new Error(`Movie not Found! Can't delete ep`);
+ }
+});
+
+//@desc    Delete video movie
+//@route   DELETE /api/movies/:mid/desc/:desc
+//@access  Private admin
+const deleteDescByMovie = asyncHandler(async (req, res) => {
+ const mid = req.params.mid;
+ const desc = req.params.desc;
+ const movie = await Movie.findById(mid);
+ if (movie) {
+  const descrip = movie.descriptions.filter((obj) => {
+   return obj.id !== desc;
+  });
+  if (descrip) {
+   movie.descriptions = descrip;
+   await movie.save();
+   res.json(movie.descriptions);
   }
  } else {
   res.status(404);
@@ -289,4 +378,8 @@ export {
  getSlide,
  updateMovieImg,
  updateMovieSlide,
+ getDescByMovie,
+ createDescByMovie,
+ updateDescByMovie,
+ deleteDescByMovie,
 };
