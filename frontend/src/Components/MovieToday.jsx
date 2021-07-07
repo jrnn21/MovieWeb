@@ -31,6 +31,7 @@ const MovieToday = () => {
     movies.map((m) => (
      <div
       className="p-1 bg-dark mb-1 d-flex todayItem"
+      style={{ maxWidth: 340 }}
       key={m._id}
       onClick={() => movieDetailScreen(m)}
      >

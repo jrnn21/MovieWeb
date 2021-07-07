@@ -97,7 +97,6 @@ const PlayScreen = ({ match, history }) => {
      <div className="col-lg-3">
       <h4 className="text-warning en mt-3">On Social</h4>
       <iframe
-       className="border-2 border border-dark"
        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FDrama855-107840864891869&tabs&width=340&height=130&small_header=false&adapt_container_width=false&hide_cover=false&show_facepile=false&appId"
        width="100%"
        height="130"

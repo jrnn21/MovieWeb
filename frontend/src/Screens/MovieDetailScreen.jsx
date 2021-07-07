@@ -175,8 +175,19 @@ const MovieDetailScreen = () => {
        ))}
      </div>
     </div>
-    <div className="col-md-3">
-     <h5 className="text-warning">New Movies Today</h5>
+    <div className="col-lg-3">
+     <h4 className="text-warning en mt-3">On Social</h4>
+     <iframe
+      src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FDrama855-107840864891869&tabs&width=340&height=130&small_header=false&adapt_container_width=false&hide_cover=false&show_facepile=false&appId"
+      width="100%"
+      height="130"
+      style={{ border: 'none', overflow: 'hidden' }}
+      scrolling="no"
+      frameBorder="0"
+      allowfullscreen="true"
+      allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
+     ></iframe>
+     <h5 className="text-warning mt-3">New Movies Today</h5>
      <MovieToday />
     </div>
    </div>
