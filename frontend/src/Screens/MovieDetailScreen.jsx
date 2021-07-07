@@ -143,7 +143,7 @@ const MovieDetailScreen = () => {
    </div>
 
    <div className="row position-relative" style={{ top: '-100px' }}>
-    <div className="col-md-8">
+    <div className="col-lg-9">
      {movie &&
       movie.descriptions.map((desc) => (
        <div key={desc._id}>
@@ -175,7 +175,7 @@ const MovieDetailScreen = () => {
        ))}
      </div>
     </div>
-    <div className="col-md-4">
+    <div className="col-md-3">
      <h5 className="text-warning">New Movies Today</h5>
      <MovieToday />
     </div>
