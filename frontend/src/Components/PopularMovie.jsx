@@ -4,9 +4,12 @@ import 'react-multi-carousel/lib/styles.css';
 import axios from 'axios';
 import VisibilitySensor from 'react-visibility-sensor';
 import { useHistory } from 'react-router';
+import { MOVIE_DETAIL_SUCCESS } from '../Constants/MovieConstants';
+import { useDispatch } from 'react-redux';
 
 const PopularMovie = () => {
  const [slides, setSlides] = useState([]);
+ const dispatch = useDispatch();
  const history = useHistory();
  useEffect(() => {
   async function fetchData() {
@@ -18,9 +21,11 @@ const PopularMovie = () => {
   fetchData();
  }, []);
 
- const gotoDetail = (m) => {
-  if (m.episodes.length !== 0) {
-   history.push(`/movies/${m._id}/episodes/${m.episodes[0]._id}`);
+ const gotoDetail = async (m) => {
+  const { data } = await axios.get(`/api/movies/${m._id}`);
+  if (data) {
+   dispatch({ type: MOVIE_DETAIL_SUCCESS, payload: data });
+   history.push(`/movies/${m._id}`);
   }
  };
 
