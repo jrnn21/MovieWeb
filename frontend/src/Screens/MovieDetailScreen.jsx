@@ -175,7 +175,7 @@ const MovieDetailScreen = () => {
        ))}
      </div>
     </div>
-    <div className="col-lg-3">
+    <div className="col-lg-3 topMove">
      <h4 className="text-warning en mt-3">On Social</h4>
      <iframe
       src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FDrama855-107840864891869&tabs&width=340&height=130&small_header=false&adapt_container_width=false&hide_cover=false&show_facepile=false&appId"

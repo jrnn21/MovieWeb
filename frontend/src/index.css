@@ -198,3 +198,10 @@ body {
   top: 0px;
  }
 }
+
+@media screen and (min-width: 992px) {
+ .topMove {
+  position: relative;
+  top: -140px;
+ }
+}
