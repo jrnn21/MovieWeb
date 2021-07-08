@@ -118,9 +118,9 @@ const VideoPageEdit = ({ match, history }) => {
      //  await axios.post('/api/uploads/img/delete', {
      //   img: movie.img,
      //  });
-     await axios.post('/api/uploads/img/delete/slide', {
-      slideImg: movie.slideImg,
-     });
+     //  await axios.post('/api/uploads/img/delete/slide', {
+     //   slideImg: movie.slideImg,
+     //  });
      const { data } = await axios.delete(`/api/movies/${movieId}`, config);
      if (data) {
       setDeletedMovie(false);
