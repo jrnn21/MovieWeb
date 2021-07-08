@@ -58,6 +58,19 @@ const HomeScreen = ({ match, history }) => {
     <PopularMovie />
     <div className="row">
      <div className="col-lg-9 mx-0 px-0">
+      <script
+       async
+       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+      ></script>
+      <ins
+       class="adsbygoogle"
+       style="display:block"
+       data-ad-format="fluid"
+       data-ad-layout-key="-ef+6k-30-ac+ty"
+       data-ad-client="ca-pub-7022107088023659"
+       data-ad-slot="5901505584"
+      ></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
       <div style={{ marginTop: 10 }}></div>
       <h4 className="text-warning">
        <RiMovieLine style={{ marginTop: '-5px' }} />{' '}
@@ -109,6 +122,17 @@ const HomeScreen = ({ match, history }) => {
        allowfullscreen="true"
        allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
       ></iframe>
+      <amp-ad
+       width="100vw"
+       height="320"
+       type="adsense"
+       data-ad-client="ca-pub-7022107088023659"
+       data-ad-slot="7707457568"
+       data-auto-format="rspv"
+       data-full-width=""
+      >
+       <div overflow=""></div>
+      </amp-ad>
       <div className="rounded border-info mt-2">
        <h6 className="bg-warning rounded-top mb-0 px-3" style={{ padding: 10 }}>
         Tag

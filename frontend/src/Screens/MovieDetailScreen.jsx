@@ -143,6 +143,19 @@ const MovieDetailScreen = () => {
    </div>
 
    <div className="row position-relative" style={{ top: '-100px' }}>
+    <script
+     async
+     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+    ></script>
+    <ins
+     class="adsbygoogle"
+     style="display:block"
+     data-ad-format="fluid"
+     data-ad-layout-key="-ef+6k-30-ac+ty"
+     data-ad-client="ca-pub-7022107088023659"
+     data-ad-slot="5901505584"
+    ></ins>
+    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     <div className="col-lg-9">
      {movie &&
       movie.descriptions.map((desc) => (
@@ -187,6 +200,17 @@ const MovieDetailScreen = () => {
       allowfullscreen="true"
       allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
      ></iframe>
+     <amp-ad
+      width="100vw"
+      height="320"
+      type="adsense"
+      data-ad-client="ca-pub-7022107088023659"
+      data-ad-slot="7707457568"
+      data-auto-format="rspv"
+      data-full-width=""
+     >
+      <div overflow=""></div>
+     </amp-ad>
      <h5 className="text-warning mt-3">New Movies Today</h5>
      <MovieToday />
     </div>

@@ -91,10 +91,34 @@ const PlayScreen = ({ match, history }) => {
            {epi.episode}
           </NavLink>
          ))}
+        <script
+         async
+         src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+        ></script>
+        <ins
+         class="adsbygoogle"
+         style="display:block"
+         data-ad-format="fluid"
+         data-ad-layout-key="-ef+6k-30-ac+ty"
+         data-ad-client="ca-pub-7022107088023659"
+         data-ad-slot="5901505584"
+        ></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
        </div>
       </div>
      </div>
      <div className="col-lg-3">
+      <amp-ad
+       width="100vw"
+       height="320"
+       type="adsense"
+       data-ad-client="ca-pub-7022107088023659"
+       data-ad-slot="7707457568"
+       data-auto-format="rspv"
+       data-full-width=""
+      >
+       <div overflow=""></div>
+      </amp-ad>
       <h4 className="text-warning en mt-3">On Social</h4>
       <iframe
        src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FDrama855-107840864891869&tabs&width=340&height=130&small_header=false&adapt_container_width=false&hide_cover=false&show_facepile=false&appId"
