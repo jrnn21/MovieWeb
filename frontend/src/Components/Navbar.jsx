@@ -120,11 +120,20 @@ const Navbar = () => {
         </li>
         <li className="nav-item ms-1">
          <NavLink
-          to="/movies/china/page/1?keyword=china"
+          to="/movies/china/page/1?keyword=chinese"
           className="nav-link rounded fs-6 navItem px-4 text-warning"
           activeClassName="bg-dark navItemColor t_warning"
          >
-          CHAINESE
+          CHINESE
+         </NavLink>
+        </li>
+        <li className="nav-item ms-1">
+         <NavLink
+          to="/movies/end/page/1?keyword=end"
+          className="nav-link rounded fs-6 navItem px-4 text-warning"
+          activeClassName="bg-dark navItemColor t_warning"
+         >
+          END
          </NavLink>
         </li>
        </ul>
