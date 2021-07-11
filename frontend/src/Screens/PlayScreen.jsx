@@ -63,6 +63,7 @@ const PlayScreen = ({ match, history }) => {
          ) : (
           <iframe
            className="react-player"
+           title={epPlay.url}
            style={{ background: '#485864' }}
            width="100%"
            height="100%"
