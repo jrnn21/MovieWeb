@@ -17,7 +17,7 @@ const Footer = () => {
     >
      <a
       target="_blank"
-      href="https://www.facebook.com/Drama855-107840864891869"
+      href="https://www.facebook.com/Drama855-102302412136438"
       rel="noreferrer"
      >
       <FaFacebookSquare

@@ -7,6 +7,7 @@ import axios from 'axios';
 import Loader from '../Components/Loader';
 import MovieToday from '../Components/MovieToday';
 import { EP_LIST_RESET } from '../Constants/MovieConstants';
+import FacebookPage from '../Components/FacebookPage';
 
 const PlayScreen = ({ match, history }) => {
  const { mid, ep } = match.params;
@@ -120,16 +121,7 @@ const PlayScreen = ({ match, history }) => {
        <div overflow=""></div>
       </amp-ad>
       <h4 className="text-warning en mt-3">On Social</h4>
-      <iframe
-       src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FDrama855-107840864891869&tabs&width=340&height=130&small_header=false&adapt_container_width=false&hide_cover=false&show_facepile=false&appId"
-       width="100%"
-       height="130"
-       style={{ border: 'none', overflow: 'hidden' }}
-       scrolling="no"
-       frameBorder="0"
-       allowfullscreen="true"
-       allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-      ></iframe>
+      <FacebookPage />
       <h6 className="text-warning mt-3 mb-2">New Movie Today</h6>
       <MovieToday />
      </div>

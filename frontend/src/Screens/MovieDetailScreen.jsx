@@ -7,6 +7,7 @@ import axios from 'axios';
 import { MOVIE_DETAIL_SUCCESS } from '../Constants/MovieConstants';
 import MovieToday from '../Components/MovieToday';
 import { BiCommentDetail } from 'react-icons/bi';
+import FacebookPage from '../Components/FacebookPage';
 
 const MovieDetailScreen = () => {
  const { mid } = useParams();
@@ -190,16 +191,7 @@ const MovieDetailScreen = () => {
     </div>
     <div className="col-lg-3 topMove">
      <h4 className="text-warning en mt-3">On Social</h4>
-     <iframe
-      src="https://www.facebook.com/plugins/page.php?href=https%3A%2F%2Fwww.facebook.com%2FDrama855-107840864891869&tabs&width=340&height=130&small_header=false&adapt_container_width=false&hide_cover=false&show_facepile=false&appId"
-      width="100%"
-      height="130"
-      style={{ border: 'none', overflow: 'hidden' }}
-      scrolling="no"
-      frameBorder="0"
-      allowfullscreen="true"
-      allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
-     ></iframe>
+     <FacebookPage />
      <amp-ad
       width="100vw"
       height="320"
