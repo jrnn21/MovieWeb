@@ -8,6 +8,7 @@ import { MOVIE_DETAIL_SUCCESS } from '../Constants/MovieConstants';
 import MovieToday from '../Components/MovieToday';
 import { BiCommentDetail } from 'react-icons/bi';
 import FacebookPage from '../Components/FacebookPage';
+import AdSense from 'react-adsense';
 
 const MovieDetailScreen = () => {
  const { mid } = useParams();
@@ -144,20 +145,28 @@ const MovieDetailScreen = () => {
    </div>
 
    <div className="row position-relative" style={{ top: '-100px' }}>
-    <script
-     async
-     src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-    ></script>
-    <ins
-     class="adsbygoogle"
-     style={{ display: 'block' }}
-     data-ad-format="fluid"
-     data-ad-layout-key="-ef+6k-30-ac+ty"
-     data-ad-client="ca-pub-7022107088023659"
-     data-ad-slot="5901505584"
-    ></ins>
-    <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     <div className="col-lg-9">
+     <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+     ></script>
+     <ins
+      class="adsbygoogle"
+      style={{ display: 'block' }}
+      data-ad-format="fluid"
+      data-ad-layout-key="-ef+6k-30-ac+ty"
+      data-ad-client="ca-pub-7022107088023659"
+      data-ad-slot="5901505584"
+     ></ins>
+     <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+     <AdSense.Google
+      client="ca-pub-7022107088023659"
+      slot="5901505584"
+      style={{ display: 'block' }}
+      format="auto"
+      responsive="true"
+      layoutKey="-ef+6k-30-ac+ty"
+     />
      {movie &&
       movie.descriptions.map((desc) => (
        <div key={desc._id}>

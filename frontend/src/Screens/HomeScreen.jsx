@@ -15,6 +15,7 @@ import NoVideo from '../Components/NoVideo';
 import { RiMovieLine } from 'react-icons/ri';
 import About from '../Components/About';
 import FacebookPage from '../Components/FacebookPage';
+import AdSense from 'react-adsense';
 
 const HomeScreen = ({ match, history }) => {
  const pageNumber = match.params.pageNumber || 1;
@@ -72,6 +73,14 @@ const HomeScreen = ({ match, history }) => {
        data-ad-slot="5901505584"
       ></ins>
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      <AdSense.Google
+       client="ca-pub-7022107088023659"
+       slot="5901505584"
+       style={{ display: 'block' }}
+       format="auto"
+       responsive="true"
+       layoutKey="-ef+6k-30-ac+ty"
+      />
       <div style={{ marginTop: 10 }}></div>
       <h4 className="text-warning">
        <RiMovieLine style={{ marginTop: '-5px' }} />{' '}
@@ -108,6 +117,27 @@ const HomeScreen = ({ match, history }) => {
         )}
        </>
       )}
+      <script
+       async
+       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
+      ></script>
+      <ins
+       class="adsbygoogle"
+       style={{ display: 'block' }}
+       data-ad-format="fluid"
+       data-ad-layout-key="-ef+6k-30-ac+ty"
+       data-ad-client="ca-pub-7022107088023659"
+       data-ad-slot="5901505584"
+      ></ins>
+      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      <AdSense.Google
+       client="ca-pub-7022107088023659"
+       slot="5901505584"
+       style={{ display: 'block' }}
+       format="auto"
+       responsive="true"
+       layoutKey="-ef+6k-30-ac+ty"
+      />
       <About />
      </div>
      <div className="col-lg-3">

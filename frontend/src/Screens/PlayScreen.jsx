@@ -8,6 +8,7 @@ import Loader from '../Components/Loader';
 import MovieToday from '../Components/MovieToday';
 import { EP_LIST_RESET } from '../Constants/MovieConstants';
 import FacebookPage from '../Components/FacebookPage';
+import AdSense from 'react-adsense';
 
 const PlayScreen = ({ match, history }) => {
  const { mid, ep } = match.params;
@@ -45,6 +46,14 @@ const PlayScreen = ({ match, history }) => {
    <div className="container mt-2" style={{ minHeight: '100vh' }}>
     <div className="row">
      <div className="col-lg-9">
+      <AdSense.Google
+       client="ca-pub-7022107088023659"
+       slot="5901505584"
+       style={{ display: 'block' }}
+       format="auto"
+       responsive="true"
+       layoutKey="-ef+6k-30-ac+ty"
+      />
       {loading ? (
        <Loader />
       ) : error ? (
@@ -106,6 +115,14 @@ const PlayScreen = ({ match, history }) => {
          data-ad-slot="5901505584"
         ></ins>
         <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+        <AdSense.Google
+         client="ca-pub-7022107088023659"
+         slot="5901505584"
+         style={{ display: 'block' }}
+         format="auto"
+         responsive="true"
+         layoutKey="-ef+6k-30-ac+ty"
+        />
        </div>
       </div>
      </div>
