@@ -4,7 +4,7 @@ import multer from 'multer';
 import fs from 'fs';
 import dotenv from 'dotenv';
 const dirname = path.dirname(new URL(import.meta.url).pathname);
-let __dirname = dirname.substring(0, dirname.length - 15);
+let __dirname = dirname.substring(1, dirname.length - 15);
 
 dotenv.config();
 
