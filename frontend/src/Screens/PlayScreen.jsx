@@ -46,14 +46,6 @@ const PlayScreen = ({ match, history }) => {
    <div className="container mt-2" style={{ minHeight: '100vh' }}>
     <div className="row">
      <div className="col-lg-9">
-      <AdSense.Google
-       client="ca-pub-7022107088023659"
-       slot="5901505584"
-       style={{ display: 'block' }}
-       format="auto"
-       responsive="true"
-       layoutKey="-ef+6k-30-ac+ty"
-      />
       {loading ? (
        <Loader />
       ) : error ? (

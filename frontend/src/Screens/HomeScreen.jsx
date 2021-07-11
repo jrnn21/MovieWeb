@@ -60,24 +60,11 @@ const HomeScreen = ({ match, history }) => {
     <PopularMovie />
     <div className="row">
      <div className="col-lg-9 mx-0 px-0">
-      <script
-       async
-       src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"
-      ></script>
-      <ins
-       class="adsbygoogle"
-       style={{ display: 'block' }}
-       data-ad-format="fluid"
-       data-ad-layout-key="-ef+6k-30-ac+ty"
-       data-ad-client="ca-pub-7022107088023659"
-       data-ad-slot="5901505584"
-      ></ins>
-      <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
       <AdSense.Google
        client="ca-pub-7022107088023659"
        slot="5901505584"
        style={{ display: 'block' }}
-       format="auto"
+       format="fluid"
        responsive="true"
        layoutKey="-ef+6k-30-ac+ty"
       />
