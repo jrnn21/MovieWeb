@@ -124,15 +124,6 @@ const HomeScreen = ({ match, history }) => {
       >
        <div overflow=""></div>
       </amp-ad>
-      <a href="https://www.counters-free.net/">free HIT Counter</a>{' '}
-      <script
-       type="text/javascript"
-       src="https://www.freevisitorcounters.com/auth.php?id=7a60c6b19f582fc7ab9ff71039bb4bd6c78813b6"
-      ></script>
-      <script
-       type="text/javascript"
-       src="https://freevisitorcounters.com/en/home/counter/846767/t/6"
-      ></script>
       <div className="rounded border-info mt-2">
        <h6 className="bg-warning rounded-top mb-0 px-3" style={{ padding: 10 }}>
         Tag
