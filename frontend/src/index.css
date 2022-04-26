@@ -2,212 +2,211 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Encode+Sans+SC:wght@300&display=swap');
 * {
- /* font-family: 'Encode Sans SC', sans-serif; */
- font-family: 'Ubuntu', sans-serif;
+  /* font-family: 'Encode Sans SC', sans-serif; */
+  font-family: 'Ubuntu', sans-serif;
 }
 
 body {
- /* font-family: 'Encode Sans SC', sans-serif; */
- font-family: 'Ubuntu', sans-serif;
- background: rgb(44, 49, 54) !important;
- overflow-y: scroll;
+  font-family: 'Ubuntu', sans-serif;
+  background: rgb(44, 49, 54) !important;
+  overflow-y: scroll;
 }
 
 .instagram {
- display: inline-block;
- text-align: center;
- border-radius: 5px;
- background: rgb(44, 49, 54);
- font-size: 220px;
- line-height: 250px;
- vertical-align: middle;
- cursor: pointer;
- box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
+  display: inline-block;
+  text-align: center;
+  border-radius: 5px;
+  background: rgb(44, 49, 54);
+  font-size: 220px;
+  line-height: 250px;
+  vertical-align: middle;
+  cursor: pointer;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.25);
 }
 
 .instagram:hover {
- background: rgb(107, 107, 107) !important;
+  background: rgb(107, 107, 107) !important;
 }
 
 .ubuntu {
- font-family: 'Ubuntu', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
 }
 
 .en {
- font-family: 'Encode Sans SC', sans-serif;
+  font-family: 'Encode Sans SC', sans-serif;
 }
 
 .testColor {
- color: rgb(62, 69, 75);
+  color: rgb(62, 69, 75);
 }
 
 .playIcon:hover {
- color: rgba(194, 194, 194, 0.767) !important;
+  color: rgba(194, 194, 194, 0.767) !important;
 }
 
 .nameMovie:hover {
- color: rgb(255, 203, 33) !important;
+  color: rgb(255, 203, 33) !important;
 }
 
 .kh {
- font-family: 'Kantumruy', sans-serif;
+  font-family: 'Kantumruy', sans-serif;
 }
 
 .khFont {
- font-family: 'Kantumruy', sans-serif;
+  font-family: 'Kantumruy', sans-serif;
 }
 
 .carasal {
- background: rgba(0, 0, 0, 0.623);
+  background: rgba(0, 0, 0, 0.623);
 }
 
 .navItem {
- color: white !important;
+  color: white !important;
 }
 
 .cateCon {
- color: white !important;
- background: rgb(0, 0, 0);
+  color: white !important;
+  background: rgb(0, 0, 0);
 }
 .cateItem {
- color: white !important;
- background: rgb(44, 62, 80);
+  color: white !important;
+  background: rgb(44, 62, 80);
 }
 .rounded-4 {
- border-radius: 15px;
+  border-radius: 15px;
 }
 .navItem:hover {
- background-color: rgb(61, 76, 90) !important;
+  background-color: rgb(61, 76, 90) !important;
 }
 .video {
- padding: 0.7rem 0.7rem 0.7rem 1rem;
+  padding: 0.7rem 0.7rem 0.7rem 1rem;
 }
 .video:hover {
- cursor: pointer;
- background-color: rgb(61, 76, 90) !important;
+  cursor: pointer;
+  background-color: rgb(61, 76, 90) !important;
 }
 .navItemColor {
- color: black !important;
+  color: black !important;
 }
 
 .player-wrapper {
- position: relative;
- padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
- border-radius: 5px;
+  position: relative;
+  padding-top: 56.25%; /* Player ratio: 100 / (1280 / 720) */
+  border-radius: 5px;
 }
 
 .react-player {
- position: absolute;
- top: 0;
- left: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .loader {
- position: absolute;
- top: 47%;
- left: 47%;
+  position: absolute;
+  top: 47%;
+  left: 47%;
 }
 
 .videoCard:hover {
- cursor: pointer;
- box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
 }
 
 .cardHover {
- opacity: 1;
- background: #a73737; /* fallback for old browsers */
- background: -webkit-linear-gradient(
-  to top,
-  #000000c5,
-  #00000000
- ); /* Chrome 10-25, Safari 5.1-6 */
- background: linear-gradient(
-  to top,
-  #000000c5,
-  #00000000
- ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  opacity: 1;
+  background: #a73737; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to top,
+    #000000c5,
+    #00000000
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(
+    to top,
+    #000000c5,
+    #00000000
+  ); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 .cardH {
- top: -360px;
- background: rgba(0, 0, 0, 0.541);
+  top: -360px;
+  background: rgba(0, 0, 0, 0.541);
 }
 .videoCard:hover .cardH {
- transition: 0.5s;
- top: 0px;
+  transition: 0.5s;
+  top: 0px;
 }
 .ep {
- overflow-y: auto;
- height: 450px;
+  overflow-y: auto;
+  height: 450px;
 }
 
 .epActive {
- color: rgb(247, 171, 6) !important;
- background: rgb(0, 112, 156);
+  color: rgb(247, 171, 6) !important;
+  background: rgb(0, 112, 156);
 }
 
 .t_warning {
- color: rgb(247, 171, 6) !important;
+  color: rgb(247, 171, 6) !important;
 }
 .t_dark {
- color: black !important;
+  color: black !important;
 }
 .todayItem:hover {
- cursor: pointer;
- box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
+  cursor: pointer;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19) !important;
 }
 
 .slideAnimate {
- width: 100%;
- overflow: hidden;
- /* margin-left: 300px;
+  width: 100%;
+  overflow: hidden;
+  /* margin-left: 300px;
  max-width: 500px; */
 }
 
 .slideAnimate h6 {
- animation: 2s slide-right forwards;
- transform: translateX(-100%);
+  animation: 2s slide-right forwards;
+  transform: translateX(-100%);
 }
 
 @keyframes slide-right {
- to {
-  transform: translateX(0);
- }
+  to {
+    transform: translateX(0);
+  }
 }
 
 .scale:hover {
- transition: 00.2s;
- transform: scale(1.2, 1.2);
+  transition: 00.2s;
+  transform: scale(1.2, 1.2);
 }
 
 .notFImg {
- position: relative;
- animation-name: example;
- animation-duration: 0.5s;
- animation-iteration-count: infinite;
+  position: relative;
+  animation-name: example;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
 }
 
 @keyframes example {
- 0% {
-  left: 0px;
-  top: 0px;
- }
- 50% {
-  top: 10px;
- }
- 100% {
-  top: 0px;
- }
+  0% {
+    left: 0px;
+    top: 0px;
+  }
+  50% {
+    top: 10px;
+  }
+  100% {
+    top: 0px;
+  }
 }
 
 @media screen and (min-width: 992px) {
- .topMove {
-  position: relative;
-  top: -140px;
- }
+  .topMove {
+    position: relative;
+    top: -140px;
+  }
 }
 
 .page-item.active .page-link {
- background-color: rgb(255, 193, 7) !important;
- border-color: rgb(255, 193, 7) !important;
- color: black !important;
+  background-color: rgb(255, 193, 7) !important;
+  border-color: rgb(255, 193, 7) !important;
+  color: black !important;
 }
