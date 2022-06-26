@@ -14,46 +14,49 @@ import AdminSlideScreen from './Screens/AdminSlideScreen';
 import MovieDetailScreen from './Screens/MovieDetailScreen';
 
 const App = () => {
- return (
-  <>
-   <Router>
-    {/* <Banner /> */}
-    <Navbar />
-    <Switch>
-     <Route path="/adminPanel/movies/:mid/edit" component={VideoPageEdit} />
-     <Route
-      path="/adminPanel/movies/search/:pageNumber"
-      component={AdminPanelScreen}
-     />
-     <Route
-      path="/adminPanel/movies/page/:pageNumber"
-      component={AdminPanelScreen}
-     />
-     <Route path="/adminPanel/slider" component={AdminSlideScreen} />
-     <Route path="/adminPanel/movies" component={AdminPanelScreen} exact />
-     <Route path="/langdyLogin" component={LoginScreen} />
-     <Route path="/somethingScreen" component={SomethingScreen} />
-     <Route path="/movies/:mid/episodes/:ep" component={PlayScreen} />
+  return (
+    <>
+      <Router>
+        {/* <Banner /> */}
+        <Navbar />
+        <Switch>
+          <Route
+            path="/adminPanel/movies/:mid/edit"
+            component={VideoPageEdit}
+          />
+          <Route
+            path="/adminPanel/movies/search/:pageNumber"
+            component={AdminPanelScreen}
+          />
+          <Route
+            path="/adminPanel/movies/page/:pageNumber"
+            component={AdminPanelScreen}
+          />
+          <Route path="/adminPanel/slider" component={AdminSlideScreen} />
+          <Route path="/adminPanel/movies" component={AdminPanelScreen} exact />
+          <Route path="/langdyLogin" component={LoginScreen} />
+          <Route path="/somethingScreen" component={SomethingScreen} />
+          <Route path="/movies/:mid/episodes/:ep" component={PlayScreen} />
 
-     <Route
-      path="/movies/search/page/:pageNumber"
-      component={HomeScreen}
-      exact
-     />
-     <Route
-      path="/movies/:typeMovie/page/:pageNumber"
-      component={HomeScreen}
-      exact
-     />
-     <Route path="/movies/page/:pageNumber" component={HomeScreen} exact />
-     <Route path="/movies/:mid" component={MovieDetailScreen} exact />
-     <Route path="/" component={HomeScreen} exact />
-     <Route component={NotFoundScreen} />
-    </Switch>
-    <Footer />
-   </Router>
-  </>
- );
+          <Route
+            path="/movies/search/page/:pageNumber"
+            component={HomeScreen}
+            exact
+          />
+          <Route
+            path="/movies/:typeMovie/page/:pageNumber"
+            component={HomeScreen}
+            exact
+          />
+          <Route path="/movies/page/:pageNumber" component={HomeScreen} exact />
+          <Route path="/movies/:mid" component={MovieDetailScreen} exact />
+          <Route path="/" component={HomeScreen} exact />
+          <Route component={NotFoundScreen} />
+        </Switch>
+        <Footer />
+      </Router>
+    </>
+  );
 };
 
 export default App;
