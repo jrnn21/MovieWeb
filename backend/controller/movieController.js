@@ -59,6 +59,7 @@ const getMoviesUpdateToday = asyncHandler(async (req, res) => {
 const getMovies = asyncHandler(async (req, res) => {
   const pageSize = 36;
   const page = Number(req.query.pageNumber) || 1;
+  const all = Number(req.query.all) || 0;
 
   const keyword = req.query.keyword
     ? {
@@ -69,19 +70,31 @@ const getMovies = asyncHandler(async (req, res) => {
       }
     : {};
   const count = await Movie.countDocuments({ ...keyword });
-  const movies = await Movie.find({ ...keyword })
-    .sort({ updatedAt: -1 })
-    .limit(pageSize)
-    .skip(pageSize * (page - 1));
+  if (all === 1) {
+    const movies = await Movie.find({ ...keyword }).sort({ updatedAt: -1 });
+    const mo = movies.map((m) => ({
+      _id: m._id,
+      movieName: m.movieName,
+      ep: m.episodes.length,
+      updateMovie: m.updateMovie,
+      img: m.img,
+    }));
+    res.json({ movies: mo, page, pages: Math.ceil(count / pageSize), count });
+  } else {
+    const movies = await Movie.find({ ...keyword })
+      .sort({ updatedAt: -1 })
+      .limit(pageSize)
+      .skip(pageSize * (page - 1));
 
-  const mo = movies.map((m) => ({
-    _id: m._id,
-    movieName: m.movieName,
-    ep: m.episodes.length,
-    updateMovie: m.updateMovie,
-    img: m.img,
-  }));
-  res.json({ movies: mo, page, pages: Math.ceil(count / pageSize), count });
+    const mo = movies.map((m) => ({
+      _id: m._id,
+      movieName: m.movieName,
+      ep: m.episodes.length,
+      updateMovie: m.updateMovie,
+      img: m.img,
+    }));
+    res.json({ movies: mo, page, pages: Math.ceil(count / pageSize), count });
+  }
 });
 
 //@desc    Fetch movie detail
